@@ -26,6 +26,8 @@
  * an audio datatype of 'float'.
  */
 
+#include "config.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -34,11 +36,14 @@
 #include <math.h> /* for ceil() */
 
 #include <dlfcn.h>
+#include <sys/stat.h>
 
 #define __REMIX_PLUGIN__
 #include <remix/remix.h>
 
 #include "ladspa.h"
+
+#define PATH_LEN 1024
 
 /* Compile in support for inplace processing? */
 #define _PROCESS_INPLACE
@@ -58,6 +63,11 @@
 
 static char * default_ladspa_path = "/usr/lib/ladspa:/usr/local/lib/ladspa:/opt/ladspa/lib";
 
+#ifndef WIN32
+#  define remix_stat_regular(mode) (S_ISREG((mode)) || S_ISLNK((mode)))
+#else
+#  define remix_stat_regular(mode) ((mode) & S_IFREG)
+#endif
 
 /* Dummy control output, used to connect all LADSPA control outputs to */
 static LADSPA_Data dummy_control_output;
@@ -844,7 +854,6 @@ remix_ladspa_optimise (RemixEnv * env, RemixBase * base)
 static CDList *
 ladspa_wrapper_load_plugins (RemixEnv * env, char * dir, char * name)
 {
-#define PATH_LEN 256
   char path[PATH_LEN];
   void * module;
   LADSPA_Descriptor_Function desc_func;
@@ -858,8 +867,12 @@ ladspa_wrapper_load_plugins (RemixEnv * env, char * dir, char * name)
   CDList * plugins = CD_EMPTY_LIST;
 #define BUF_LEN 256
   static char buf[BUF_LEN];
+  struct stat statbuf;
 
   snprintf (path, PATH_LEN, "%s/%s", dir, name);
+
+  if (stat (path, &statbuf) == -1) return CD_EMPTY_LIST;
+  if (!remix_stat_regular (statbuf.st_mode)) return CD_EMPTY_LIST;
 
   module = dlopen (path, RTLD_NOW);
   if (!module) return CD_EMPTY_LIST;

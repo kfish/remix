@@ -42,6 +42,7 @@
 
 #include "ctxdata.h"
 
+#include "remix_compat.h"
 #include "remix_plugin.h"
 
 /* Max line length for error messages etc. */
@@ -166,19 +167,6 @@ struct _RemixSound {
   RemixStream * _rate_envstream;
   RemixStream * _gain_envstream;
   RemixStream * _blend_envstream;
-};
-
-typedef struct _RemixSquareToneChannel RemixSquareToneChannel;
-typedef struct _RemixSquareTone RemixSquareTone;
-
-struct _RemixSquareToneChannel {
-  RemixCount _cycle_offset;
-};
-
-struct _RemixSquareTone {
-  RemixBase base;
-  float frequency;
-  CDSet * channels;
 };
 
 typedef struct _RemixMonitor RemixMonitor;

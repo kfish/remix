@@ -91,7 +91,8 @@ remix_channel_destroy (RemixEnv * env, RemixBase * base)
 }
 
 RemixChunk *
-remix_channel_add_chunk (RemixEnv * env, RemixChannel * channel, RemixChunk * chunk)
+remix_channel_add_chunk (RemixEnv * env, RemixChannel * channel,
+			 RemixChunk * chunk)
 {
   channel->chunks = cd_list_insert (env, channel->chunks, CD_TYPE_POINTER,
                                     CD_POINTER(chunk),
@@ -100,8 +101,8 @@ remix_channel_add_chunk (RemixEnv * env, RemixChannel * channel, RemixChunk * ch
 }
 
 RemixChunk *
-remix_channel_add_new_chunk (RemixEnv * env, RemixChannel * channel, RemixCount offset,
-			  RemixCount length)
+remix_channel_add_new_chunk (RemixEnv * env, RemixChannel * channel,
+			     RemixCount offset, RemixCount length)
 {
   RemixChunk * chunk = remix_chunk_new (env, offset, length);
   return remix_channel_add_chunk (env, channel, chunk);
@@ -109,7 +110,7 @@ remix_channel_add_new_chunk (RemixEnv * env, RemixChannel * channel, RemixCount 
 
 void
 remix_channel_remove_chunk (RemixEnv * env, RemixChannel * channel,
-			   RemixChunk * chunk)
+			    RemixChunk * chunk)
 {
   channel->chunks = cd_list_remove (env, channel->chunks, CD_TYPE_POINTER,
 				    CD_POINTER(chunk));
@@ -117,7 +118,7 @@ remix_channel_remove_chunk (RemixEnv * env, RemixChannel * channel,
 
 RemixChunk *
 remix_channel_find_chunk_before (RemixEnv * env, RemixChannel * channel,
-				RemixCount index)
+				 RemixCount index)
 {
   CDList * l;
   RemixChunk * u, * up = RemixNone;
@@ -154,6 +155,27 @@ remix_chunk_item_valid_length (CDList * l)
     un = (RemixChunk *)ln->data.s_pointer;
     return MIN (u->length, un->start_index - u->start_index);
   }
+}
+
+RemixChunk *
+remix_channel_get_chunk_at (RemixEnv * env, RemixChannel * channel,
+			    RemixCount offset)
+{
+  CDList * l;
+  RemixChunk * u;
+  RemixCount vl; /* valid length */
+
+  for (l = channel->chunks; l; l = l->next) {
+    u = (RemixChunk *)l->data.s_pointer;
+    vl = remix_chunk_item_valid_length (l);
+    if (u->start_index <= offset && u->start_index + vl > offset) {
+      /* chunk validly spans offset: return it */
+      return u;
+    }
+  }
+
+  /* No chunks found spanning offset */
+  return RemixNone;
 }
 
 CDList *
@@ -235,22 +257,23 @@ remix_channel_write0 (RemixEnv * env, RemixChannel * channel, RemixCount length)
  * Returns the number of samples func'ed.
  */
 RemixCount
-remix_channel_chunkfuncify (RemixEnv * env, RemixChannel * channel, RemixCount count,
-			   RemixChunkFunc func, int channelname, void * data)
+remix_channel_chunkfuncify (RemixEnv * env, RemixChannel * channel,
+			    RemixCount count, RemixChunkFunc func,
+			    int channelname, void * data)
 {
   RemixChunk * u;
   RemixCount remaining = count, funced = 0, n, vl;
   RemixError error;
 
   remix_dprintf ("[remix_channel_chunkfuncify] (%p, +%ld) @ %ld\n",
-	  channel, count, channel->_current_offset);
+		 channel, count, channel->_current_offset);
 
   while (remaining > 0) {
     channel->_current_chunk =
       remix_channel_get_chunk_item_at (channel, channel->_current_offset);
     if (channel->_current_chunk == RemixNone) {
       remix_dprintf ("[remix_channel_chunkfuncify] channel incomplete, funced %ld\n",
-		  funced);
+		     funced);
       return funced; /* Channel incomplete */
     }
 
@@ -265,7 +288,7 @@ remix_channel_chunkfuncify (RemixEnv * env, RemixChannel * channel, RemixCount c
       switch (error) {
       case REMIX_ERROR_SILENCE:
 	n = _remix_chunk_clear_region (env, u, channel->_current_offset,
-				    MIN(remaining, vl), 0, NULL);
+				       MIN(remaining, vl), 0, NULL);
 	break;
       default:
 	n = 0;
@@ -499,9 +522,10 @@ remix_channel_chunkchunkchunkfuncify (RemixEnv * env,
 RemixCount
 remix_channel_copy (RemixEnv * env, RemixChannel * src, RemixChannel * dest, RemixCount count)
 {
-  return remix_channel_chunkchunkfuncify (env, src, dest, count,
-				       (RemixChunkChunkFunc)_remix_chunk_copy,
-				       0, NULL);
+  return
+    remix_channel_chunkchunkfuncify (env, src, dest, count,
+				     (RemixChunkChunkFunc)_remix_chunk_copy,
+				     0, NULL);
 }
 
 RemixCount

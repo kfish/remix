@@ -42,7 +42,8 @@
 /* RemixStream */
 
 /* Optimisation dependencies: none */
-static RemixStream * remix_stream_optimise (RemixEnv * env, RemixStream * stream);
+static RemixStream * remix_stream_optimise (RemixEnv * env,
+					    RemixStream * stream);
 
 RemixBase *
 remix_stream_init (RemixEnv * env, RemixBase * base)
@@ -61,8 +62,8 @@ remix_stream_init (RemixEnv * env, RemixBase * base)
 }
 
 static RemixStream *
-remix_stream_add_channel_unchecked (RemixEnv * env, RemixStream * stream, int name,
-				 RemixChannel * channel)
+remix_stream_add_channel_unchecked (RemixEnv * env, RemixStream * stream,
+				    int name, RemixChannel * channel)
 {
   stream->channels = cd_set_insert (env, stream->channels, name,
 				    CD_POINTER(channel));
@@ -102,7 +103,8 @@ remix_stream_new_contiguous (RemixEnv * env, RemixCount length)
 }
 
 RemixStream *
-remix_stream_new_from_buffers (RemixEnv * env, RemixCount length, RemixPCM ** buffers)
+remix_stream_new_from_buffers (RemixEnv * env, RemixCount length,
+			       RemixPCM ** buffers)
 {
   CDSet * s;
   RemixStream * stream = remix_stream_new (env);
@@ -318,15 +320,17 @@ remix_stream_optimise (RemixEnv * env, RemixStream * stream)
  *
  */
 RemixCount
-remix_stream_chunkfuncify (RemixEnv * env, RemixStream * stream, RemixCount count,
-			RemixChunkFunc func, void * data)
+remix_stream_chunkfuncify (RemixEnv * env, RemixStream * stream,
+			   RemixCount count,
+			   RemixChunkFunc func, void * data)
 {
   RemixCount n, minn = count, offset = remix_tell (env, (RemixBase *)stream);
   CDSet * s, * channels = remix_get_channels (env);
   RemixChannel * channel;
 
   for (s = channels; s; s = s->next) {
-    remix_dprintf ("[remix_stream_chunkfuncify] thinking of channel %d\n", s->key);
+    remix_dprintf ("[remix_stream_chunkfuncify] thinking of channel %d\n",
+		   s->key);
   }
 
   if (stream == RemixNone) {
@@ -335,7 +339,7 @@ remix_stream_chunkfuncify (RemixEnv * env, RemixStream * stream, RemixCount coun
   }
 
   remix_dprintf ("[remix_stream_chunkfuncify] (%p, +%ld) @ %ld\n",
-	      stream, count, offset);
+		 stream, count, offset);
 
   for (s = stream->channels; s; s = s->next) {
     if (cd_set_contains (env, channels, s->key)) {
@@ -353,9 +357,9 @@ remix_stream_chunkfuncify (RemixEnv * env, RemixStream * stream, RemixCount coun
 }
 
 RemixCount
-remix_stream_chunkchunkfuncify (RemixEnv * env, RemixStream * src, RemixStream * dest,
-			     RemixCount count, RemixChunkChunkFunc func,
-			     void * data)
+remix_stream_chunkchunkfuncify (RemixEnv * env, RemixStream * src,
+				RemixStream * dest, RemixCount count,
+				RemixChunkChunkFunc func, void * data)
 {
   RemixCount n, minn = count;
   RemixCount src_offset = remix_tell (env, (RemixBase *)src);

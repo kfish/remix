@@ -29,6 +29,19 @@
 #define __REMIX__
 #include "remix.h"
 
+typedef struct _RemixSquareToneChannel RemixSquareToneChannel;
+typedef struct _RemixSquareTone RemixSquareTone;
+
+struct _RemixSquareToneChannel {
+  RemixCount _cycle_offset;
+};
+
+struct _RemixSquareTone {
+  RemixBase base;
+  float frequency;
+  CDSet * channels;
+};
+
 /* Optimisation dependencies: none */
 static RemixSquareTone * remix_squaretone_optimise (RemixEnv * env,
 					      RemixSquareTone * squaretone);
@@ -64,17 +77,18 @@ remix_squaretone_init (RemixEnv * env, RemixBase * base)
   squaretone->channels = NULL;
   remix_squaretone_replace_channels (env, squaretone);
   remix_squaretone_optimise (env, squaretone);
-  return (RemixBase *)squaretone;
+  return base;
 }
 
-RemixSquareTone *
+RemixBase *
 remix_squaretone_new (RemixEnv * env, float frequency)
 {
   RemixSquareTone * squaretone =
     (RemixSquareTone *)remix_base_new_subclass (env, sizeof (struct _RemixSquareTone));
   remix_squaretone_init (env, (RemixBase *)squaretone);
   squaretone->frequency = frequency;
-  return squaretone;
+
+  return (RemixBase *)squaretone;
 }
 
 static RemixBase *
@@ -111,17 +125,19 @@ remix_squaretone_prepare (RemixEnv * env, RemixBase * base)
 }
 
 float
-remix_squaretone_set_frequency (RemixEnv * env, RemixSquareTone * squaretone,
+remix_squaretone_set_frequency (RemixEnv * env, RemixBase * base,
 			     float frequency)
 {
+  RemixSquareTone * squaretone = (RemixSquareTone *)base;
   float old = squaretone->frequency;
   squaretone->frequency = frequency;
   return old;
 }
 
 float
-remix_squaretone_get_frequency (RemixEnv * env, RemixSquareTone * squaretone)
+remix_squaretone_get_frequency (RemixEnv * env, RemixBase * base)
 {
+  RemixSquareTone * squaretone = (RemixSquareTone *)base;
   return squaretone->frequency;
 }
 

@@ -34,6 +34,7 @@
 #include "remix.h"
 
 #define PATH_KEY 1
+#define BLOCK_FRAMES 4096
 
 typedef struct _RemixSndfileInstance RemixSndfileInstance;
 
@@ -42,6 +43,8 @@ struct _RemixSndfileInstance {
   int writing;
   SNDFILE * file;
   SF_INFO info;
+  float * pcm;
+  sf_count_t pcm_n;
 };
 
 
@@ -65,8 +68,13 @@ remix_sndfile_create (RemixEnv * env, RemixBase * sndfile,
     si->info.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16; /* XXX: assumes WAV */
 
     si->file = sf_open  (path, SFM_WRITE, &si->info);
+    si->pcm = NULL;
+    si->pcm_n = 0;
   } else {
     si->file = sf_open (path, SFM_READ, &si->info);
+    si->pcm = (float *) malloc (BLOCK_FRAMES * si->info.channels *
+				sizeof(float));
+    si->pcm_n = 0;
   }
 
   if (si->file == NULL) {
@@ -132,22 +140,59 @@ remix_sndfile_destroy (RemixEnv * env, RemixBase * base)
 }
 
 /* An RemixChunkFunc for creating sndfile */
+
 static RemixCount
-remix_sndfile_read_into_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
-			      RemixCount count, int channelname, void * data)
+remix_sndfile_read_update (RemixEnv * env, RemixBase * sndfile,
+			   RemixCount count)
+{
+  RemixSndfileInstance * si = (RemixSndfileInstance *)sndfile->instance_data;
+
+  si->pcm_n = sf_readf_float (si->file, si->pcm, count);
+
+  return si->pcm_n;
+}
+
+static RemixCount
+remix_sndfile_read_into_chunk (RemixEnv * env, RemixChunk * chunk,
+			       RemixCount offset, RemixCount count,
+			       int channelname, void * data)
 {
   RemixBase * sndfile = (RemixBase *)data;
-  RemixPCM * d;
-  RemixCount remaining = count, written = 0, n;
+  RemixPCM * d, * p;
+  RemixCount remaining = count, written = 0, n, i;
   RemixSndfileInstance * si = (RemixSndfileInstance *)sndfile->instance_data;
 
   remix_dprintf ("[remix_sndfile_read_into_chunk] (%p, +%ld) @ %ld\n",
-	      sndfile, count, remix_tell (env, sndfile));
+		 sndfile, count, remix_tell (env, sndfile));
 
   d = &chunk->data[offset];
 
+  n = MIN (remaining, BLOCK_FRAMES);
+  if (channelname == 0)
+    remix_sndfile_read_update (env, sndfile, n);
+
+  n = si->pcm_n;
+  
+  p = si->pcm;
+  p += channelname;
+  
+  for (i = 0; i < n; i++) {
+    *d++ = *p;
+    p += si->info.channels;
+  }
+    
+  if (n == 0) { /* EOF */
+    n = _remix_pcm_set (d, 0.0, remaining);
+  }
+  
+  remaining -= n;
+  written += n;
+  
+#if 0 /* mono only */
+  d = &chunk->data[offset];
+
   while (remaining > 0) {
-    n = MIN (remaining, 4096);
+    n = MIN (remaining, BLOCK_FRAMES);
     n = sf_readf_float (si->file, d, n);
 
     if (n == 0) { /* EOF */
@@ -159,6 +204,7 @@ remix_sndfile_read_into_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount of
 
     d += n;
   }
+#endif
 
   return written;
 }
@@ -174,12 +220,12 @@ remix_sndfile_write_from_chunk (RemixEnv * env, RemixChunk * chunk,
   RemixSndfileInstance * si = (RemixSndfileInstance *) sndfile->instance_data;
 
   remix_dprintf ("[remix_sndfile_write_from_chunk] (%p, +%ld) @ %ld\n",
-		sndfile, count, remix_tell (env, sndfile));
+		 sndfile, count, remix_tell (env, sndfile));
 
   d = &chunk->data[offset];
 
   while (remaining > 0) {
-    n = MIN (remaining, 4096);
+    n = MIN (remaining, BLOCK_FRAMES);
     n = sf_write_float (si->file, d, n);
 
     if (n == 0) { /* EOF */
@@ -196,16 +242,18 @@ remix_sndfile_write_from_chunk (RemixEnv * env, RemixChunk * chunk,
 }
 
 static RemixCount
-remix_sndfile_reader_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			   RemixStream * input, RemixStream * output)
+remix_sndfile_reader_process (RemixEnv * env, RemixBase * base,
+			      RemixCount count,
+			      RemixStream * input, RemixStream * output)
 {
   return remix_stream_chunkfuncify (env, output, count,
-				   remix_sndfile_read_into_chunk, base);
+				    remix_sndfile_read_into_chunk, base);
 }
 
 static RemixCount
-remix_sndfile_writer_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			   RemixStream * input, RemixStream * output)
+remix_sndfile_writer_process (RemixEnv * env, RemixBase * base,
+			      RemixCount count,
+			      RemixStream * input, RemixStream * output)
 {
   return remix_stream_chunkfuncify (env, output, count,
 				   remix_sndfile_write_from_chunk, base);

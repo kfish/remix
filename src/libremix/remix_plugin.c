@@ -36,6 +36,7 @@
 #include <dirent.h>
 #include <string.h>
 #include <dlfcn.h>
+#include <sys/stat.h>
 
 #define __REMIX__
 #include "remix.h"
@@ -60,7 +61,8 @@ remix_plugin_init (RemixEnv * env, const char * path)
   module = dlopen (path, RTLD_NOW);
 
   if (!module) {
-    fprintf (stderr, "Error opening %s: %s\n", path, dlerror ());
+    remix_dprintf ("[remix_plugin_init] Unable to open %s: %s\n", path,
+		   dlerror ());
     remix_set_error (env, REMIX_ERROR_SYSTEM);
     return CD_EMPTY_LIST;
   }
@@ -70,36 +72,6 @@ remix_plugin_init (RemixEnv * env, const char * path)
   }
 
   return CD_EMPTY_LIST;
-}
-
-
-/*
- * Implementation of stripname for matching plugins of form
- * lib(.*).so
- *
- * If you want to implement support for other dynamic library
- * naming schemes, the correct thing to do is implement another
- * one of these functions. The g_module stuff deals with the
- * actual filenames portably.
- */
-static char *
-stripname (char * d_name)
-{
-  int len, blen;
-#define BUF_LEN 8
-  char buf[BUF_LEN];
-
-  if (strncmp (d_name, "lib", 3)) return 0;
-
-  len = strlen (d_name);
-  /*snprintf (buf, BUF_LEN, ".so.%d", REMIX_PLUGIN_API_MAJOR);*/
-  snprintf (buf, BUF_LEN, ".%d", REMIX_PLUGIN_API_MAJOR);
-  blen = strlen (buf);
-  if (strncmp (&d_name[len-blen], buf, blen)) return 0;
-
-  d_name[len-blen] = '\0';
-
-  return &d_name[3];
 }
 
 #define BUFLEN 256
@@ -112,6 +84,7 @@ init_dynamic_plugins_dir (RemixEnv * env, char * dirname)
   struct dirent * dirent;
   char * name;
   static char buf[BUFLEN];
+  struct stat statbuf;
 
   dir = opendir (dirname);
   if (!dir) {
@@ -120,16 +93,20 @@ init_dynamic_plugins_dir (RemixEnv * env, char * dirname)
   }
 
   while ((dirent = readdir (dir)) != NULL) {
-    if ((name = stripname (dirent->d_name)) != NULL) {
-      /*snprintf (buf, BUFLEN, "%s/%s.so", dirname, dirent->d_name);*/
-      snprintf (buf, BUFLEN, "%s/%s.1", dirname, dirent->d_name);
+    name = dirent->d_name;
+
+    remix_dprintf ("[init_dynamic_plugins_dir] trying %s ... ", name);
+    snprintf (buf, BUFLEN, "%s/%s", dirname, name);
+      
+    if (stat (buf, &statbuf) == -1) {
+      remix_set_error (env, REMIX_ERROR_SYSTEM);
+    } else if (remix_stat_regular (statbuf.st_mode)) {
       plugins = cd_list_join (env, plugins, remix_plugin_init (env, buf));
     }
   }
 
   return plugins;
 }
-
 
 static CDList *
 remix_plugin_initialise_dynamic (RemixEnv * env)
