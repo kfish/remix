@@ -1,0 +1,172 @@
+\section{remix\_\-stream.h File Reference}
+\label{remix__stream_8h}\index{remix_stream.h@{remix\_\-stream.h}}
+
+
+\subsection{Detailed Description}
+The abstraction of multichannel audio data in libremix is known as a stream. 
+
+A stream may consist of multiple channels, each of which can consist of an arbitrary number of sparsely placed chunks of raw audio data. The channels are named with spatial names such as LEFT, RIGHT and CENTRE as required for common home, studio and theatre environments.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=10cm]{streams}\caption{Inside a Remix stream}
+\end{center}
+\end{figure}
+
+
+Generic routines are provided for mixing, multiplying and blending streams of data.
+
+{\tt \#include $<$remix/remix\_\-types.h$>$}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Remix\-Stream} $\ast$ {\bf remix\_\-stream\_\-new} ({\bf Remix\-Env} $\ast$env)
+\item 
+{\bf Remix\-Stream} $\ast$ {\bf remix\_\-stream\_\-new\_\-contiguous} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Count} length)
+\item 
+{\bf Remix\-Stream} $\ast$ {\bf remix\_\-stream\_\-new\_\-from\_\-buffers} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Count} length, {\bf Remix\-PCM} $\ast$$\ast$buffers)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-nr\_\-channels} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream)
+\item 
+{\bf Remix\-Channel} $\ast$ {\bf remix\_\-stream\_\-find\_\-channel} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, int name)
+\item 
+{\bf Remix\-Channel} $\ast$ {\bf remix\_\-stream\_\-add\_\-channel} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, int name)
+\item 
+{\bf Remix\-Stream} $\ast$ {\bf remix\_\-stream\_\-remove\_\-channel} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, int name)
+\item 
+{\bf Remix\-Stream} $\ast$ {\bf remix\_\-stream\_\-add\_\-chunks} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, {\bf Remix\-Count} offset, {\bf Remix\-Count} length)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-write0} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, {\bf Remix\-Count} count)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-write} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, {\bf Remix\-Count} count, {\bf Remix\-Stream} $\ast$data)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-copy} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$src, {\bf Remix\-Stream} $\ast$dest, {\bf Remix\-Count} count)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-gain} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, {\bf Remix\-Count} count, {\bf Remix\-PCM} gain)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-mix} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$src, {\bf Remix\-Stream} $\ast$dest, {\bf Remix\-Count} count)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-mult} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$src, {\bf Remix\-Stream} $\ast$dest, {\bf Remix\-Count} count)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-streams\_\-mix} ({\bf Remix\-Env} $\ast$env, CDList $\ast$streams, {\bf Remix\-Stream} $\ast$dest, {\bf Remix\-Count} count)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-fade} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$src, {\bf Remix\-Stream} $\ast$dest, {\bf Remix\-Count} count)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-blend} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$src, {\bf Remix\-Stream} $\ast$dest, {\bf Remix\-Stream} $\ast$blend, {\bf Remix\-Count} count)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-interleave\_\-2} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, int name1, int name2, {\bf Remix\-PCM} $\ast$dest, {\bf Remix\-Count} count)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-stream\_\-deinterleave\_\-2} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Stream} $\ast$stream, int name1, int name2, {\bf Remix\-PCM} $\ast$src, {\bf Remix\-Count} count)
+\item 
+int {\bf remix\_\-chunk\_\-later} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Chunk} $\ast$u1, {\bf Remix\-Chunk} $\ast$u2)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-chunk\_\-clear} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Chunk} $\ast$chunk)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{remix_stream.h@{remix\_\-stream.h}!remix_chunk_clear@{remix\_\-chunk\_\-clear}}
+\index{remix_chunk_clear@{remix\_\-chunk\_\-clear}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-chunk\_\-clear ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Chunk} $\ast$ {\em chunk})}\label{remix__stream_8h_a20}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_chunk_later@{remix\_\-chunk\_\-later}}
+\index{remix_chunk_later@{remix\_\-chunk\_\-later}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-chunk\_\-later ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Chunk} $\ast$ {\em u1}, {\bf Remix\-Chunk} $\ast$ {\em u2})}\label{remix__stream_8h_a19}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_add_channel@{remix\_\-stream\_\-add\_\-channel}}
+\index{remix_stream_add_channel@{remix\_\-stream\_\-add\_\-channel}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Channel}$\ast$ remix\_\-stream\_\-add\_\-channel ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, int {\em name})}\label{remix__stream_8h_a5}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_add_chunks@{remix\_\-stream\_\-add\_\-chunks}}
+\index{remix_stream_add_chunks@{remix\_\-stream\_\-add\_\-chunks}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Stream}$\ast$ remix\_\-stream\_\-add\_\-chunks ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, {\bf Remix\-Count} {\em offset}, {\bf Remix\-Count} {\em length})}\label{remix__stream_8h_a7}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_blend@{remix\_\-stream\_\-blend}}
+\index{remix_stream_blend@{remix\_\-stream\_\-blend}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-blend ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em src}, {\bf Remix\-Stream} $\ast$ {\em dest}, {\bf Remix\-Stream} $\ast$ {\em blend}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a16}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_copy@{remix\_\-stream\_\-copy}}
+\index{remix_stream_copy@{remix\_\-stream\_\-copy}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-copy ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em src}, {\bf Remix\-Stream} $\ast$ {\em dest}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a10}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_deinterleave_2@{remix\_\-stream\_\-deinterleave\_\-2}}
+\index{remix_stream_deinterleave_2@{remix\_\-stream\_\-deinterleave\_\-2}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-deinterleave\_\-2 ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, int {\em name1}, int {\em name2}, {\bf Remix\-PCM} $\ast$ {\em src}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a18}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_fade@{remix\_\-stream\_\-fade}}
+\index{remix_stream_fade@{remix\_\-stream\_\-fade}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-fade ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em src}, {\bf Remix\-Stream} $\ast$ {\em dest}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a15}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_find_channel@{remix\_\-stream\_\-find\_\-channel}}
+\index{remix_stream_find_channel@{remix\_\-stream\_\-find\_\-channel}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Channel}$\ast$ remix\_\-stream\_\-find\_\-channel ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, int {\em name})}\label{remix__stream_8h_a4}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_gain@{remix\_\-stream\_\-gain}}
+\index{remix_stream_gain@{remix\_\-stream\_\-gain}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-gain ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, {\bf Remix\-Count} {\em count}, {\bf Remix\-PCM} {\em gain})}\label{remix__stream_8h_a11}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_interleave_2@{remix\_\-stream\_\-interleave\_\-2}}
+\index{remix_stream_interleave_2@{remix\_\-stream\_\-interleave\_\-2}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-interleave\_\-2 ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, int {\em name1}, int {\em name2}, {\bf Remix\-PCM} $\ast$ {\em dest}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a17}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_mix@{remix\_\-stream\_\-mix}}
+\index{remix_stream_mix@{remix\_\-stream\_\-mix}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-mix ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em src}, {\bf Remix\-Stream} $\ast$ {\em dest}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a12}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_mult@{remix\_\-stream\_\-mult}}
+\index{remix_stream_mult@{remix\_\-stream\_\-mult}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-mult ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em src}, {\bf Remix\-Stream} $\ast$ {\em dest}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a13}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_new@{remix\_\-stream\_\-new}}
+\index{remix_stream_new@{remix\_\-stream\_\-new}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Stream}$\ast$ remix\_\-stream\_\-new ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix__stream_8h_a0}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_new_contiguous@{remix\_\-stream\_\-new\_\-contiguous}}
+\index{remix_stream_new_contiguous@{remix\_\-stream\_\-new\_\-contiguous}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Stream}$\ast$ remix\_\-stream\_\-new\_\-contiguous ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Count} {\em length})}\label{remix__stream_8h_a1}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_new_from_buffers@{remix\_\-stream\_\-new\_\-from\_\-buffers}}
+\index{remix_stream_new_from_buffers@{remix\_\-stream\_\-new\_\-from\_\-buffers}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Stream}$\ast$ remix\_\-stream\_\-new\_\-from\_\-buffers ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Count} {\em length}, {\bf Remix\-PCM} $\ast$$\ast$ {\em buffers})}\label{remix__stream_8h_a2}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_nr_channels@{remix\_\-stream\_\-nr\_\-channels}}
+\index{remix_stream_nr_channels@{remix\_\-stream\_\-nr\_\-channels}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-nr\_\-channels ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream})}\label{remix__stream_8h_a3}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_remove_channel@{remix\_\-stream\_\-remove\_\-channel}}
+\index{remix_stream_remove_channel@{remix\_\-stream\_\-remove\_\-channel}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Stream}$\ast$ remix\_\-stream\_\-remove\_\-channel ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, int {\em name})}\label{remix__stream_8h_a6}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_write@{remix\_\-stream\_\-write}}
+\index{remix_stream_write@{remix\_\-stream\_\-write}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-write ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, {\bf Remix\-Count} {\em count}, {\bf Remix\-Stream} $\ast$ {\em data})}\label{remix__stream_8h_a9}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_stream_write0@{remix\_\-stream\_\-write0}}
+\index{remix_stream_write0@{remix\_\-stream\_\-write0}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-stream\_\-write0 ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Stream} $\ast$ {\em stream}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a8}
+
+
+\index{remix_stream.h@{remix\_\-stream.h}!remix_streams_mix@{remix\_\-streams\_\-mix}}
+\index{remix_streams_mix@{remix\_\-streams\_\-mix}!remix_stream.h@{remix\_\-stream.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-streams\_\-mix ({\bf Remix\-Env} $\ast$ {\em env}, CDList $\ast$ {\em streams}, {\bf Remix\-Stream} $\ast$ {\em dest}, {\bf Remix\-Count} {\em count})}\label{remix__stream_8h_a14}
+
+

@@ -1,0 +1,321 @@
+\section{remix.h File Reference}
+\label{remix_8h}\index{remix.h@{remix.h}}
+
+
+\subsection{Detailed Description}
+Base types and public interfaces to libremix. 
+
+
+
+{\tt \#include $<$remix/remix\_\-types.h$>$}\par
+{\tt \#include $<$remix/remix\_\-deck.h$>$}\par
+{\tt \#include $<$remix/remix\_\-envelope.h$>$}\par
+{\tt \#include $<$remix/remix\_\-stream.h$>$}\par
+{\tt \#include $<$remix/remix\_\-time.h$>$}\par
+{\tt \#include $<$remix/remix\_\-meta.h$>$}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Remix\-Env} $\ast$ {\bf remix\_\-init} (void)
+\item 
+{\bf Remix\-Env} $\ast$ {\bf remix\_\-init\_\-clone} ({\bf Remix\-Env} $\ast$env)
+\item 
+void {\bf remix\_\-purge} ({\bf Remix\-Env} $\ast$env)
+\item 
+{\bf Remix\-Error} {\bf remix\_\-last\_\-error} ({\bf Remix\-Env} $\ast$env)
+\item 
+char $\ast$ {\bf remix\_\-error\_\-string} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Error} error)
+\item 
+{\bf Remix\-Samplerate} {\bf remix\_\-set\_\-samplerate} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Samplerate} samplerate)
+\item 
+{\bf Remix\-Samplerate} {\bf remix\_\-get\_\-samplerate} ({\bf Remix\-Env} $\ast$env)
+\item 
+{\bf Remix\-Tempo} {\bf remix\_\-set\_\-tempo} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Tempo} tempo)
+\item 
+{\bf Remix\-Tempo} {\bf remix\_\-get\_\-tempo} ({\bf Remix\-Env} $\ast$env)
+\item 
+CDSet $\ast$ {\bf remix\_\-set\_\-channels} ({\bf Remix\-Env} $\ast$env, CDSet $\ast$channelset)
+\item 
+CDSet $\ast$ {\bf remix\_\-get\_\-channels} ({\bf Remix\-Env} $\ast$env)
+\item 
+{\bf Remix\-Plugin} $\ast$ {\bf remix\_\-find\_\-plugin} ({\bf Remix\-Env} $\ast$env, char $\ast$identifier)
+\item 
+{\bf Remix\-Base} $\ast$ {\bf remix\_\-new} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Plugin} $\ast$plugin, CDSet $\ast$parameters)
+\item 
+CDSet $\ast$ {\bf remix\_\-suggest} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Plugin} $\ast$plugin, CDSet $\ast$parameters)
+\item 
+int {\bf remix\_\-get\_\-init\_\-parameter\_\-key} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Plugin} $\ast$plugin, char $\ast$name)
+\item 
+int {\bf remix\_\-get\_\-parameter\_\-key} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base, char $\ast$name)
+\item 
+{\bf Remix\-Parameter} {\bf remix\_\-set\_\-parameter} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base, int key, {\bf Remix\-Parameter} parameter)
+\item 
+{\bf Remix\-Parameter} {\bf remix\_\-get\_\-parameter} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base, int key)
+\item 
+{\bf Remix\-Parameter\-Type} {\bf remix\_\-get\_\-parameter\_\-type} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base, int key)
+\item 
+{\bf Remix\-Base} $\ast$ {\bf remix\_\-clone\_\-subclass} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+int {\bf remix\_\-destroy} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+int {\bf remix\_\-destroy\_\-list} ({\bf Remix\-Env} $\ast$env, CDList $\ast$list)
+\item 
+{\bf Remix\-Base} $\ast$ {\bf remix\_\-prepare} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-process} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base, {\bf Remix\-Count} count, {\bf Remix\-Stream} $\ast$input, {\bf Remix\-Stream} $\ast$output)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-length} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-seek} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base, {\bf Remix\-Count} offset, int whence)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-tell} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+int {\bf remix\_\-flush} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-set\_\-mixlength} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Count} mixlength)
+\item 
+{\bf Remix\-Count} {\bf remix\_\-get\_\-mixlength} ({\bf Remix\-Env} $\ast$env)
+\item 
+int {\bf remix\_\-is\_\-writeable} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+int {\bf remix\_\-is\_\-seekable} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+int {\bf remix\_\-is\_\-cacheable} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+int {\bf remix\_\-is\_\-causal} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+char $\ast$ {\bf remix\_\-set\_\-name} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base, char $\ast$name)
+\item 
+char $\ast$ {\bf remix\_\-get\_\-name} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Base} $\ast$base)
+\item 
+{\bf Remix\-Square\-Tone} $\ast$ {\bf remix\_\-squaretone\_\-new} ({\bf Remix\-Env} $\ast$env, float frequency)
+\item 
+float {\bf remix\_\-squaretone\_\-set\_\-frequency} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Square\-Tone} $\ast$squaretone, float frequency)
+\item 
+float {\bf remix\_\-squaretone\_\-get\_\-frequency} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Square\-Tone} $\ast$squaretone)
+\item 
+{\bf Remix\-Monitor} $\ast$ {\bf remix\_\-monitor\_\-new} ({\bf Remix\-Env} $\ast$env)
+\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+CDSet $\ast$ {\bf REMIX\_\-MONO}
+\item 
+CDSet $\ast$ {\bf REMIX\_\-STEREO}
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{remix.h@{remix.h}!remix_clone_subclass@{remix\_\-clone\_\-subclass}}
+\index{remix_clone_subclass@{remix\_\-clone\_\-subclass}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Base}$\ast$ remix\_\-clone\_\-subclass ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a21}
+
+
+\index{remix.h@{remix.h}!remix_destroy@{remix\_\-destroy}}
+\index{remix_destroy@{remix\_\-destroy}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-destroy ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a22}
+
+
+\index{remix.h@{remix.h}!remix_destroy_list@{remix\_\-destroy\_\-list}}
+\index{remix_destroy_list@{remix\_\-destroy\_\-list}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-destroy\_\-list ({\bf Remix\-Env} $\ast$ {\em env}, CDList $\ast$ {\em list})}\label{remix_8h_a23}
+
+
+\index{remix.h@{remix.h}!remix_error_string@{remix\_\-error\_\-string}}
+\index{remix_error_string@{remix\_\-error\_\-string}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ remix\_\-error\_\-string ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Error} {\em error})}\label{remix_8h_a6}
+
+
+\index{remix.h@{remix.h}!remix_find_plugin@{remix\_\-find\_\-plugin}}
+\index{remix_find_plugin@{remix\_\-find\_\-plugin}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Plugin}$\ast$ remix\_\-find\_\-plugin ({\bf Remix\-Env} $\ast$ {\em env}, char $\ast$ {\em identifier})}\label{remix_8h_a13}
+
+
+\index{remix.h@{remix.h}!remix_flush@{remix\_\-flush}}
+\index{remix_flush@{remix\_\-flush}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-flush ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a29}
+
+
+\index{remix.h@{remix.h}!remix_get_channels@{remix\_\-get\_\-channels}}
+\index{remix_get_channels@{remix\_\-get\_\-channels}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}CDSet$\ast$ remix\_\-get\_\-channels ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix_8h_a12}
+
+
+\index{remix.h@{remix.h}!remix_get_init_parameter_key@{remix\_\-get\_\-init\_\-parameter\_\-key}}
+\index{remix_get_init_parameter_key@{remix\_\-get\_\-init\_\-parameter\_\-key}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-get\_\-init\_\-parameter\_\-key ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Plugin} $\ast$ {\em plugin}, char $\ast$ {\em name})}\label{remix_8h_a16}
+
+
+\index{remix.h@{remix.h}!remix_get_mixlength@{remix\_\-get\_\-mixlength}}
+\index{remix_get_mixlength@{remix\_\-get\_\-mixlength}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-get\_\-mixlength ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix_8h_a31}
+
+
+\index{remix.h@{remix.h}!remix_get_name@{remix\_\-get\_\-name}}
+\index{remix_get_name@{remix\_\-get\_\-name}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ remix\_\-get\_\-name ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a37}
+
+
+\index{remix.h@{remix.h}!remix_get_parameter@{remix\_\-get\_\-parameter}}
+\index{remix_get_parameter@{remix\_\-get\_\-parameter}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Parameter} remix\_\-get\_\-parameter ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base}, int {\em key})}\label{remix_8h_a19}
+
+
+\index{remix.h@{remix.h}!remix_get_parameter_key@{remix\_\-get\_\-parameter\_\-key}}
+\index{remix_get_parameter_key@{remix\_\-get\_\-parameter\_\-key}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-get\_\-parameter\_\-key ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base}, char $\ast$ {\em name})}\label{remix_8h_a17}
+
+
+\index{remix.h@{remix.h}!remix_get_parameter_type@{remix\_\-get\_\-parameter\_\-type}}
+\index{remix_get_parameter_type@{remix\_\-get\_\-parameter\_\-type}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Parameter\-Type} remix\_\-get\_\-parameter\_\-type ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base}, int {\em key})}\label{remix_8h_a20}
+
+
+\index{remix.h@{remix.h}!remix_get_samplerate@{remix\_\-get\_\-samplerate}}
+\index{remix_get_samplerate@{remix\_\-get\_\-samplerate}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Samplerate} remix\_\-get\_\-samplerate ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix_8h_a8}
+
+
+\index{remix.h@{remix.h}!remix_get_tempo@{remix\_\-get\_\-tempo}}
+\index{remix_get_tempo@{remix\_\-get\_\-tempo}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Tempo} remix\_\-get\_\-tempo ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix_8h_a10}
+
+
+\index{remix.h@{remix.h}!remix_init@{remix\_\-init}}
+\index{remix_init@{remix\_\-init}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Env}$\ast$ remix\_\-init (void)}\label{remix_8h_a2}
+
+
+\index{remix.h@{remix.h}!remix_init_clone@{remix\_\-init\_\-clone}}
+\index{remix_init_clone@{remix\_\-init\_\-clone}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Env}$\ast$ remix\_\-init\_\-clone ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix_8h_a3}
+
+
+\index{remix.h@{remix.h}!remix_is_cacheable@{remix\_\-is\_\-cacheable}}
+\index{remix_is_cacheable@{remix\_\-is\_\-cacheable}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-is\_\-cacheable ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a34}
+
+
+\index{remix.h@{remix.h}!remix_is_causal@{remix\_\-is\_\-causal}}
+\index{remix_is_causal@{remix\_\-is\_\-causal}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-is\_\-causal ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a35}
+
+
+\index{remix.h@{remix.h}!remix_is_seekable@{remix\_\-is\_\-seekable}}
+\index{remix_is_seekable@{remix\_\-is\_\-seekable}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-is\_\-seekable ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a33}
+
+
+\index{remix.h@{remix.h}!remix_is_writeable@{remix\_\-is\_\-writeable}}
+\index{remix_is_writeable@{remix\_\-is\_\-writeable}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-is\_\-writeable ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a32}
+
+
+\index{remix.h@{remix.h}!remix_last_error@{remix\_\-last\_\-error}}
+\index{remix_last_error@{remix\_\-last\_\-error}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Error} remix\_\-last\_\-error ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix_8h_a5}
+
+
+\index{remix.h@{remix.h}!remix_length@{remix\_\-length}}
+\index{remix_length@{remix\_\-length}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-length ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a26}
+
+
+\index{remix.h@{remix.h}!remix_monitor_new@{remix\_\-monitor\_\-new}}
+\index{remix_monitor_new@{remix\_\-monitor\_\-new}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Monitor}$\ast$ remix\_\-monitor\_\-new ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix_8h_a41}
+
+
+\index{remix.h@{remix.h}!remix_new@{remix\_\-new}}
+\index{remix_new@{remix\_\-new}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Base}$\ast$ remix\_\-new ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Plugin} $\ast$ {\em plugin}, CDSet $\ast$ {\em parameters})}\label{remix_8h_a14}
+
+
+\index{remix.h@{remix.h}!remix_prepare@{remix\_\-prepare}}
+\index{remix_prepare@{remix\_\-prepare}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Base}$\ast$ remix\_\-prepare ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a24}
+
+
+\index{remix.h@{remix.h}!remix_process@{remix\_\-process}}
+\index{remix_process@{remix\_\-process}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-process ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base}, {\bf Remix\-Count} {\em count}, {\bf Remix\-Stream} $\ast$ {\em input}, {\bf Remix\-Stream} $\ast$ {\em output})}\label{remix_8h_a25}
+
+
+\index{remix.h@{remix.h}!remix_purge@{remix\_\-purge}}
+\index{remix_purge@{remix\_\-purge}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void remix\_\-purge ({\bf Remix\-Env} $\ast$ {\em env})}\label{remix_8h_a4}
+
+
+\index{remix.h@{remix.h}!remix_seek@{remix\_\-seek}}
+\index{remix_seek@{remix\_\-seek}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-seek ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base}, {\bf Remix\-Count} {\em offset}, int {\em whence})}\label{remix_8h_a27}
+
+
+\index{remix.h@{remix.h}!remix_set_channels@{remix\_\-set\_\-channels}}
+\index{remix_set_channels@{remix\_\-set\_\-channels}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}CDSet$\ast$ remix\_\-set\_\-channels ({\bf Remix\-Env} $\ast$ {\em env}, CDSet $\ast$ {\em channelset})}\label{remix_8h_a11}
+
+
+\index{remix.h@{remix.h}!remix_set_mixlength@{remix\_\-set\_\-mixlength}}
+\index{remix_set_mixlength@{remix\_\-set\_\-mixlength}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-set\_\-mixlength ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Count} {\em mixlength})}\label{remix_8h_a30}
+
+
+\index{remix.h@{remix.h}!remix_set_name@{remix\_\-set\_\-name}}
+\index{remix_set_name@{remix\_\-set\_\-name}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ remix\_\-set\_\-name ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base}, char $\ast$ {\em name})}\label{remix_8h_a36}
+
+
+\index{remix.h@{remix.h}!remix_set_parameter@{remix\_\-set\_\-parameter}}
+\index{remix_set_parameter@{remix\_\-set\_\-parameter}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Parameter} remix\_\-set\_\-parameter ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base}, int {\em key}, {\bf Remix\-Parameter} {\em parameter})}\label{remix_8h_a18}
+
+
+\index{remix.h@{remix.h}!remix_set_samplerate@{remix\_\-set\_\-samplerate}}
+\index{remix_set_samplerate@{remix\_\-set\_\-samplerate}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Samplerate} remix\_\-set\_\-samplerate ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Samplerate} {\em samplerate})}\label{remix_8h_a7}
+
+
+\index{remix.h@{remix.h}!remix_set_tempo@{remix\_\-set\_\-tempo}}
+\index{remix_set_tempo@{remix\_\-set\_\-tempo}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Tempo} remix\_\-set\_\-tempo ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Tempo} {\em tempo})}\label{remix_8h_a9}
+
+
+\index{remix.h@{remix.h}!remix_squaretone_get_frequency@{remix\_\-squaretone\_\-get\_\-frequency}}
+\index{remix_squaretone_get_frequency@{remix\_\-squaretone\_\-get\_\-frequency}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float remix\_\-squaretone\_\-get\_\-frequency ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Square\-Tone} $\ast$ {\em squaretone})}\label{remix_8h_a40}
+
+
+\index{remix.h@{remix.h}!remix_squaretone_new@{remix\_\-squaretone\_\-new}}
+\index{remix_squaretone_new@{remix\_\-squaretone\_\-new}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Square\-Tone}$\ast$ remix\_\-squaretone\_\-new ({\bf Remix\-Env} $\ast$ {\em env}, float {\em frequency})}\label{remix_8h_a38}
+
+
+\index{remix.h@{remix.h}!remix_squaretone_set_frequency@{remix\_\-squaretone\_\-set\_\-frequency}}
+\index{remix_squaretone_set_frequency@{remix\_\-squaretone\_\-set\_\-frequency}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float remix\_\-squaretone\_\-set\_\-frequency ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Square\-Tone} $\ast$ {\em squaretone}, float {\em frequency})}\label{remix_8h_a39}
+
+
+\index{remix.h@{remix.h}!remix_suggest@{remix\_\-suggest}}
+\index{remix_suggest@{remix\_\-suggest}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}CDSet$\ast$ remix\_\-suggest ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Plugin} $\ast$ {\em plugin}, CDSet $\ast$ {\em parameters})}\label{remix_8h_a15}
+
+
+\index{remix.h@{remix.h}!remix_tell@{remix\_\-tell}}
+\index{remix_tell@{remix\_\-tell}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Count} remix\_\-tell ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Base} $\ast$ {\em base})}\label{remix_8h_a28}
+
+
+
+
+\subsection{Variable Documentation}
+\index{remix.h@{remix.h}!REMIX_MONO@{REMIX\_\-MONO}}
+\index{REMIX_MONO@{REMIX\_\-MONO}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}CDSet$\ast$ {\bf REMIX\_\-MONO}}\label{remix_8h_a0}
+
+
+\index{remix.h@{remix.h}!REMIX_STEREO@{REMIX\_\-STEREO}}
+\index{REMIX_STEREO@{REMIX\_\-STEREO}!remix.h@{remix.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}CDSet$\ast$ {\bf REMIX\_\-STEREO}}\label{remix_8h_a1}
+
+

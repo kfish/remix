@@ -1,0 +1,100 @@
+\section{remix\_\-envelope.h File Reference}
+\label{remix__envelope_8h}\index{remix_envelope.h@{remix\_\-envelope.h}}
+
+
+\subsection{Detailed Description}
+Base types and public interfaces to libremix. 
+
+
+
+{\tt \#include $<$remix/remix\_\-types.h$>$}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Remix\-Envelope} $\ast$ {\bf remix\_\-envelope\_\-new} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope\-Type} type)
+\item 
+{\bf Remix\-Envelope\-Type} {\bf remix\_\-envelope\_\-set\_\-type} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope, {\bf Remix\-Envelope\-Type} type)
+\item 
+{\bf Remix\-Envelope\-Type} {\bf remix\_\-envelope\_\-get\_\-type} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope)
+\item 
+{\bf Remix\-Time\-Type} {\bf remix\_\-envelope\_\-set\_\-timetype} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope, {\bf Remix\-Time\-Type} timetype)
+\item 
+{\bf Remix\-Time\-Type} {\bf remix\_\-envelope\_\-get\_\-timetype} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope)
+\item 
+{\bf Remix\-PCM} {\bf remix\_\-envelope\_\-get\_\-value} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope, {\bf Remix\-Time} time)
+\item 
+{\bf Remix\-Time} {\bf remix\_\-envelope\_\-get\_\-duration} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope)
+\item 
+{\bf Remix\-PCM} {\bf remix\_\-envelope\_\-get\_\-integral} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+{\bf Remix\-Point} $\ast$ {\bf remix\_\-envelope\_\-add\_\-point} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope, {\bf Remix\-Time} time, {\bf Remix\-PCM} value)
+\item 
+{\bf Remix\-Envelope} $\ast$ {\bf remix\_\-envelope\_\-remove\_\-point} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope, {\bf Remix\-Point} $\ast$point)
+\item 
+{\bf Remix\-Envelope} $\ast$ {\bf remix\_\-envelope\_\-scale} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope, {\bf Remix\-PCM} gain)
+\item 
+{\bf Remix\-Envelope} $\ast$ {\bf remix\_\-envelope\_\-shift} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Envelope} $\ast$envelope, {\bf Remix\-Time} delta)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_add_point@{remix\_\-envelope\_\-add\_\-point}}
+\index{remix_envelope_add_point@{remix\_\-envelope\_\-add\_\-point}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Point}$\ast$ remix\_\-envelope\_\-add\_\-point ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope}, {\bf Remix\-Time} {\em time}, {\bf Remix\-PCM} {\em value})}\label{remix__envelope_8h_a8}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_get_duration@{remix\_\-envelope\_\-get\_\-duration}}
+\index{remix_envelope_get_duration@{remix\_\-envelope\_\-get\_\-duration}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time} remix\_\-envelope\_\-get\_\-duration ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope})}\label{remix__envelope_8h_a6}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_get_integral@{remix\_\-envelope\_\-get\_\-integral}}
+\index{remix_envelope_get_integral@{remix\_\-envelope\_\-get\_\-integral}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-PCM} remix\_\-envelope\_\-get\_\-integral ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__envelope_8h_a7}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_get_timetype@{remix\_\-envelope\_\-get\_\-timetype}}
+\index{remix_envelope_get_timetype@{remix\_\-envelope\_\-get\_\-timetype}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time\-Type} remix\_\-envelope\_\-get\_\-timetype ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope})}\label{remix__envelope_8h_a4}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_get_type@{remix\_\-envelope\_\-get\_\-type}}
+\index{remix_envelope_get_type@{remix\_\-envelope\_\-get\_\-type}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Envelope\-Type} remix\_\-envelope\_\-get\_\-type ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope})}\label{remix__envelope_8h_a2}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_get_value@{remix\_\-envelope\_\-get\_\-value}}
+\index{remix_envelope_get_value@{remix\_\-envelope\_\-get\_\-value}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-PCM} remix\_\-envelope\_\-get\_\-value ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope}, {\bf Remix\-Time} {\em time})}\label{remix__envelope_8h_a5}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_new@{remix\_\-envelope\_\-new}}
+\index{remix_envelope_new@{remix\_\-envelope\_\-new}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Envelope}$\ast$ remix\_\-envelope\_\-new ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope\-Type} {\em type})}\label{remix__envelope_8h_a0}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_remove_point@{remix\_\-envelope\_\-remove\_\-point}}
+\index{remix_envelope_remove_point@{remix\_\-envelope\_\-remove\_\-point}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Envelope}$\ast$ remix\_\-envelope\_\-remove\_\-point ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope}, {\bf Remix\-Point} $\ast$ {\em point})}\label{remix__envelope_8h_a9}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_scale@{remix\_\-envelope\_\-scale}}
+\index{remix_envelope_scale@{remix\_\-envelope\_\-scale}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Envelope}$\ast$ remix\_\-envelope\_\-scale ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope}, {\bf Remix\-PCM} {\em gain})}\label{remix__envelope_8h_a10}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_set_timetype@{remix\_\-envelope\_\-set\_\-timetype}}
+\index{remix_envelope_set_timetype@{remix\_\-envelope\_\-set\_\-timetype}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time\-Type} remix\_\-envelope\_\-set\_\-timetype ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope}, {\bf Remix\-Time\-Type} {\em timetype})}\label{remix__envelope_8h_a3}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_set_type@{remix\_\-envelope\_\-set\_\-type}}
+\index{remix_envelope_set_type@{remix\_\-envelope\_\-set\_\-type}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Envelope\-Type} remix\_\-envelope\_\-set\_\-type ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope}, {\bf Remix\-Envelope\-Type} {\em type})}\label{remix__envelope_8h_a1}
+
+
+\index{remix_envelope.h@{remix\_\-envelope.h}!remix_envelope_shift@{remix\_\-envelope\_\-shift}}
+\index{remix_envelope_shift@{remix\_\-envelope\_\-shift}!remix_envelope.h@{remix\_\-envelope.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Envelope}$\ast$ remix\_\-envelope\_\-shift ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Envelope} $\ast$ {\em envelope}, {\bf Remix\-Time} {\em delta})}\label{remix__envelope_8h_a11}
+
+

@@ -1,0 +1,107 @@
+\section{remix\_\-time.h File Reference}
+\label{remix__time_8h}\index{remix_time.h@{remix\_\-time.h}}
+
+
+\subsection{Detailed Description}
+Base types and public interfaces to libremix. 
+
+
+
+{\tt \#include $<$remix/remix\_\-types.h$>$}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Remix\-Time} {\bf remix\_\-time\_\-convert} ({\bf Remix\-Env} $\ast$env, {\bf Remix\-Time} time, {\bf Remix\-Time\-Type} old\_\-type, {\bf Remix\-Time\-Type} new\_\-type)
+\item 
+{\bf Remix\-Time} {\bf remix\_\-time\_\-zero} ({\bf Remix\-Time\-Type} type)
+\item 
+{\bf Remix\-Time} {\bf remix\_\-time\_\-invalid} ({\bf Remix\-Time\-Type} type)
+\item 
+int {\bf remix\_\-time\_\-is\_\-invalid} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} time)
+\item 
+{\bf Remix\-Time} {\bf remix\_\-time\_\-add} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+{\bf Remix\-Time} {\bf remix\_\-time\_\-sub} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+{\bf Remix\-Time} {\bf remix\_\-time\_\-min} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+{\bf Remix\-Time} {\bf remix\_\-time\_\-max} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+int {\bf remix\_\-time\_\-eq} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+int {\bf remix\_\-time\_\-gt} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+int {\bf remix\_\-time\_\-lt} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+int {\bf remix\_\-time\_\-ge} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\item 
+int {\bf remix\_\-time\_\-le} ({\bf Remix\-Time\-Type} type, {\bf Remix\-Time} t1, {\bf Remix\-Time} t2)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{remix_time.h@{remix\_\-time.h}!remix_time_add@{remix\_\-time\_\-add}}
+\index{remix_time_add@{remix\_\-time\_\-add}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time} remix\_\-time\_\-add ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a4}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_convert@{remix\_\-time\_\-convert}}
+\index{remix_time_convert@{remix\_\-time\_\-convert}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time} remix\_\-time\_\-convert ({\bf Remix\-Env} $\ast$ {\em env}, {\bf Remix\-Time} {\em time}, {\bf Remix\-Time\-Type} {\em old\_\-type}, {\bf Remix\-Time\-Type} {\em new\_\-type})}\label{remix__time_8h_a0}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_eq@{remix\_\-time\_\-eq}}
+\index{remix_time_eq@{remix\_\-time\_\-eq}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-time\_\-eq ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a8}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_ge@{remix\_\-time\_\-ge}}
+\index{remix_time_ge@{remix\_\-time\_\-ge}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-time\_\-ge ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a11}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_gt@{remix\_\-time\_\-gt}}
+\index{remix_time_gt@{remix\_\-time\_\-gt}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-time\_\-gt ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a9}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_invalid@{remix\_\-time\_\-invalid}}
+\index{remix_time_invalid@{remix\_\-time\_\-invalid}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time} remix\_\-time\_\-invalid ({\bf Remix\-Time\-Type} {\em type})}\label{remix__time_8h_a2}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_is_invalid@{remix\_\-time\_\-is\_\-invalid}}
+\index{remix_time_is_invalid@{remix\_\-time\_\-is\_\-invalid}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-time\_\-is\_\-invalid ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em time})}\label{remix__time_8h_a3}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_le@{remix\_\-time\_\-le}}
+\index{remix_time_le@{remix\_\-time\_\-le}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-time\_\-le ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a12}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_lt@{remix\_\-time\_\-lt}}
+\index{remix_time_lt@{remix\_\-time\_\-lt}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int remix\_\-time\_\-lt ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a10}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_max@{remix\_\-time\_\-max}}
+\index{remix_time_max@{remix\_\-time\_\-max}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time} remix\_\-time\_\-max ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a7}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_min@{remix\_\-time\_\-min}}
+\index{remix_time_min@{remix\_\-time\_\-min}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time} remix\_\-time\_\-min ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a6}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_sub@{remix\_\-time\_\-sub}}
+\index{remix_time_sub@{remix\_\-time\_\-sub}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time} remix\_\-time\_\-sub ({\bf Remix\-Time\-Type} {\em type}, {\bf Remix\-Time} {\em t1}, {\bf Remix\-Time} {\em t2})}\label{remix__time_8h_a5}
+
+
+\index{remix_time.h@{remix\_\-time.h}!remix_time_zero@{remix\_\-time\_\-zero}}
+\index{remix_time_zero@{remix\_\-time\_\-zero}!remix_time.h@{remix\_\-time.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Remix\-Time} remix\_\-time\_\-zero ({\bf Remix\-Time\-Type} {\em type})}\label{remix__time_8h_a1}
+
+

@@ -1,0 +1,28 @@
+Thanks to the following people, without whose advice and encouragement
+Axel would never have seen the light of day. -K.
+
+
+Carsten Haitzler (The Rasterman) <raster@rasterman.com>
+
+  Rasterman wrote Evas, a graphical canvas library. The simplicity of
+Axel's programming interface was inspired by that of Evas, and Rasterman
+has effusively explained the motivation for much of Evas' design to me.
+Having programmed with Evas, and having witnessed Rasterman code up complex
+graphical applications in no time flat using Evas, I knew that it would be
+well worth the effort to write a similarly powerful abstraction library for
+audio.
+
+
+Erik de Castro Lopo <erikd@zip.com.au>
+
+  Erik is the author of libsndfile, and has given excellent advice on
+optimisations for Axel.
+
+
+Silvia Pfeiffer <Silvia.Pfeiffer@CSIRO.AU>
+
+  Silvia supervised the construction of Axel, and has a knack for
+pinpointing obscure design problems and limitations. She prompted the
+creation of Axel after noticing the lack of genericity within early
+versions of Sweep, and she has guided the scope of Axel with an eye to
+ensuring its utility in a wide range of projects.

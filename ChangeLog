@@ -1,0 +1,27 @@
+Thu May  1 08:58:55 EST 2003 Conrad Parker <conrad@metadecks.org>
+
+	* changed name to libremix, type names to Remix*, funcs remix_*
+
+Sun Apr 27 20:23:15 EST 2003 Conrad Parker <conrad@metadecks.org>
+
+	* added ctxdata.pc
+
+Tue Apr  8 22:57:37 EST 2003 Conrad Parker <conrad@metadecks.org>
+
+	* merged in ALSA monitor support from Erik de Castro Lopo
+	* merged in tests subdir from Erik de Castro Lopo
+	* random bugfixes
+
+Wed Apr  2 22:34:07 EST 2003 Conrad Parker <conrad@metadecks.org>
+
+	* changed name to libmash
+	* made pointer types explicit
+	* changed all type and function names to Mash*/mash_*
+
+Mon Nov 25 2002 Conrad Parker <conrad@metadecks.org>
+
+	* updated to use libsndfile1
+
+Fri Aug 17 11:41:50 EST 2001 Conrad Parker <Conrad.Parker@CSIRO.AU>
+
+	* First build (5000 lines, 3 weeks, much coffee)

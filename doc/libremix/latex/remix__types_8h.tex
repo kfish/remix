@@ -1,0 +1,511 @@
+\section{remix\_\-types.h File Reference}
+\label{remix__types_8h}\index{remix_types.h@{remix\_\-types.h}}
+
+
+\subsection{Detailed Description}
+Base types and public interfaces to libremix. 
+
+
+
+{\tt \#include $<$limits.h$>$}\par
+{\tt \#include \char`\"{}ctxdata.h\char`\"{}}\par
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+union {\bf \_\-Remix\-Time}
+\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Remix\-None}\ NULL
+\item 
+\#define {\bf REMIX\_\-COUNT\_\-MAX}\ (LONG\_\-MAX - 1L)
+\item 
+\#define {\bf REMIX\_\-COUNT\_\-MIN}\ LONG\_\-MIN
+\item 
+\#define {\bf REMIX\_\-COUNT\_\-INFINITE}\ REMIX\_\-COUNT\_\-MAX
+\item 
+\#define {\bf REMIX\_\-ERROR\_\-OK}\ 0
+\item 
+\#define {\bf REMIX\_\-ERROR\_\-INVALID}\ 1
+\item 
+\#define {\bf REMIX\_\-ERROR\_\-NOENTITY}\ 2
+\item 
+\#define {\bf REMIX\_\-ERROR\_\-EXISTS}\ 3
+\item 
+\#define {\bf REMIX\_\-ERROR\_\-SILENCE}\ 4
+\item 
+\#define {\bf REMIX\_\-ERROR\_\-NOOP}\ 5
+\item 
+\#define {\bf REMIX\_\-ERROR\_\-SYSTEM}\ 6
+\item 
+\#define {\bf REMIX\_\-RANGE\_\-LOWER\_\-BOUND\_\-VALID}\ (1$<$$<$0)
+\item 
+\#define {\bf REMIX\_\-RANGE\_\-UPPER\_\-BOUND\_\-VALID}\ (1$<$$<$1)
+\item 
+\#define {\bf REMIX\_\-RANGE\_\-STEP\_\-VALID}\ (1$<$$<$2)
+\item 
+\#define {\bf REMIX\_\-RANGE\_\-ALL\_\-VALID}
+\item 
+\#define {\bf REMIX\_\-HINT\_\-DEFAULT}\ (0)
+\item 
+\#define {\bf REMIX\_\-HINT\_\-LOG}\ (1$<$$<$0)
+\item 
+\#define {\bf REMIX\_\-HINT\_\-TIME}\ (1$<$$<$1)
+\item 
+\#define {\bf REMIX\_\-HINT\_\-FILENAME}\ (1$<$$<$2)
+\item 
+\#define {\bf REMIX\_\-CONSTRAINT\_\-EMPTY}\ ((Remix\-Constraint)\{NULL\})
+\item 
+\#define {\bf REMIX\_\-SAMPLES}(x)\ (({\bf Remix\-Time})\{({\bf Remix\-Count})(x)\})
+\item 
+\#define {\bf REMIX\_\-SECONDS}(x)\ (({\bf Remix\-Time})\{(float)(x)\})
+\item 
+\#define {\bf REMIX\_\-BEAT24S}(x)\ (({\bf Remix\-Time})\{(int)(x)\})
+\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef int {\bf Remix\-Error}
+\item 
+typedef float {\bf Remix\-PCM}
+\item 
+typedef long {\bf Remix\-Count}
+\item 
+typedef void {\bf Remix\-Opaque}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Base}
+\item 
+typedef CDScalar {\bf Remix\-Parameter}
+\item 
+typedef int {\bf Remix\-Flags}
+\item 
+typedef double {\bf Remix\-Samplerate}
+\item 
+typedef double {\bf Remix\-Tempo}
+\item 
+typedef {\bf \_\-Remix\-Time} {\bf Remix\-Time}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Env}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Point}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Envelope}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Chunk}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Channel}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Stream}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Deck}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Track}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Layer}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Sound}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Meta\-Author}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Meta\-Text}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Plugin}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Square\-Tone}
+\item 
+typedef {\bf Remix\-Opaque} {\bf Remix\-Monitor}
+\end{CompactItemize}
+\subsection*{Enumerations}
+\begin{CompactItemize}
+\item 
+enum {\bf Remix\-Channel\-Name} \{ \par
+{\bf REMIX\_\-CHANNEL\_\-LEFT}, 
+{\bf REMIX\_\-CHANNEL\_\-RIGHT}, 
+{\bf REMIX\_\-CHANNEL\_\-CENTRE}, 
+{\bf REMIX\_\-CHANNEL\_\-REAR}, 
+\par
+{\bf REMIX\_\-CHANNEL\_\-REAR\_\-LEFT}, 
+{\bf REMIX\_\-CHANNEL\_\-REAR\_\-RIGHT}, 
+{\bf REMIX\_\-CHANNEL\_\-REAR\_\-CENTRE}, 
+{\bf REMIX\_\-CHANNEL\_\-LFE}
+ \}
+\item 
+enum {\bf Remix\-Time\-Type} \{ {\bf REMIX\_\-TIME\_\-INVALID}, 
+{\bf REMIX\_\-TIME\_\-SAMPLES}, 
+{\bf REMIX\_\-TIME\_\-SECONDS}, 
+{\bf REMIX\_\-TIME\_\-BEAT24S}
+ \}
+\item 
+enum {\bf Remix\-Envelope\-Type} \{ {\bf REMIX\_\-ENVELOPE\_\-LINEAR}, 
+{\bf REMIX\_\-ENVELOPE\_\-SPLINE}
+ \}
+\item 
+enum {\bf Remix\-Parameter\-Type} \{ \par
+{\bf REMIX\_\-TYPE\_\-BOOL} =  0, 
+{\bf REMIX\_\-TYPE\_\-INT}, 
+{\bf REMIX\_\-TYPE\_\-FLOAT}, 
+{\bf REMIX\_\-TYPE\_\-STRING}, 
+\par
+{\bf REMIX\_\-TYPE\_\-BASE}
+ \}
+\item 
+enum {\bf Remix\-Constraint\-Type} \{ {\bf REMIX\_\-CONSTRAINT\_\-TYPE\_\-NONE} =  0, 
+{\bf REMIX\_\-CONSTRAINT\_\-TYPE\_\-LIST}, 
+{\bf REMIX\_\-CONSTRAINT\_\-TYPE\_\-RANGE}
+ \}
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{remix_types.h@{remix\_\-types.h}!REMIX_BEAT24S@{REMIX\_\-BEAT24S}}
+\index{REMIX_BEAT24S@{REMIX\_\-BEAT24S}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-BEAT24S(x)\ (({\bf Remix\-Time})\{(int)(x)\})}\label{remix__types_8h_a22}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_CONSTRAINT_EMPTY@{REMIX\_\-CONSTRAINT\_\-EMPTY}}
+\index{REMIX_CONSTRAINT_EMPTY@{REMIX\_\-CONSTRAINT\_\-EMPTY}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-CONSTRAINT\_\-EMPTY\ ((Remix\-Constraint)\{NULL\})}\label{remix__types_8h_a19}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_COUNT_INFINITE@{REMIX\_\-COUNT\_\-INFINITE}}
+\index{REMIX_COUNT_INFINITE@{REMIX\_\-COUNT\_\-INFINITE}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-COUNT\_\-INFINITE\ REMIX\_\-COUNT\_\-MAX}\label{remix__types_8h_a3}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_COUNT_MAX@{REMIX\_\-COUNT\_\-MAX}}
+\index{REMIX_COUNT_MAX@{REMIX\_\-COUNT\_\-MAX}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-COUNT\_\-MAX\ (LONG\_\-MAX - 1L)}\label{remix__types_8h_a1}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_COUNT_MIN@{REMIX\_\-COUNT\_\-MIN}}
+\index{REMIX_COUNT_MIN@{REMIX\_\-COUNT\_\-MIN}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-COUNT\_\-MIN\ LONG\_\-MIN}\label{remix__types_8h_a2}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_ERROR_EXISTS@{REMIX\_\-ERROR\_\-EXISTS}}
+\index{REMIX_ERROR_EXISTS@{REMIX\_\-ERROR\_\-EXISTS}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-ERROR\_\-EXISTS\ 3}\label{remix__types_8h_a7}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_ERROR_INVALID@{REMIX\_\-ERROR\_\-INVALID}}
+\index{REMIX_ERROR_INVALID@{REMIX\_\-ERROR\_\-INVALID}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-ERROR\_\-INVALID\ 1}\label{remix__types_8h_a5}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_ERROR_NOENTITY@{REMIX\_\-ERROR\_\-NOENTITY}}
+\index{REMIX_ERROR_NOENTITY@{REMIX\_\-ERROR\_\-NOENTITY}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-ERROR\_\-NOENTITY\ 2}\label{remix__types_8h_a6}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_ERROR_NOOP@{REMIX\_\-ERROR\_\-NOOP}}
+\index{REMIX_ERROR_NOOP@{REMIX\_\-ERROR\_\-NOOP}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-ERROR\_\-NOOP\ 5}\label{remix__types_8h_a9}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_ERROR_OK@{REMIX\_\-ERROR\_\-OK}}
+\index{REMIX_ERROR_OK@{REMIX\_\-ERROR\_\-OK}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-ERROR\_\-OK\ 0}\label{remix__types_8h_a4}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_ERROR_SILENCE@{REMIX\_\-ERROR\_\-SILENCE}}
+\index{REMIX_ERROR_SILENCE@{REMIX\_\-ERROR\_\-SILENCE}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-ERROR\_\-SILENCE\ 4}\label{remix__types_8h_a8}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_ERROR_SYSTEM@{REMIX\_\-ERROR\_\-SYSTEM}}
+\index{REMIX_ERROR_SYSTEM@{REMIX\_\-ERROR\_\-SYSTEM}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-ERROR\_\-SYSTEM\ 6}\label{remix__types_8h_a10}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_HINT_DEFAULT@{REMIX\_\-HINT\_\-DEFAULT}}
+\index{REMIX_HINT_DEFAULT@{REMIX\_\-HINT\_\-DEFAULT}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-HINT\_\-DEFAULT\ (0)}\label{remix__types_8h_a15}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_HINT_FILENAME@{REMIX\_\-HINT\_\-FILENAME}}
+\index{REMIX_HINT_FILENAME@{REMIX\_\-HINT\_\-FILENAME}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-HINT\_\-FILENAME\ (1$<$$<$2)}\label{remix__types_8h_a18}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_HINT_LOG@{REMIX\_\-HINT\_\-LOG}}
+\index{REMIX_HINT_LOG@{REMIX\_\-HINT\_\-LOG}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-HINT\_\-LOG\ (1$<$$<$0)}\label{remix__types_8h_a16}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_HINT_TIME@{REMIX\_\-HINT\_\-TIME}}
+\index{REMIX_HINT_TIME@{REMIX\_\-HINT\_\-TIME}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-HINT\_\-TIME\ (1$<$$<$1)}\label{remix__types_8h_a17}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_RANGE_ALL_VALID@{REMIX\_\-RANGE\_\-ALL\_\-VALID}}
+\index{REMIX_RANGE_ALL_VALID@{REMIX\_\-RANGE\_\-ALL\_\-VALID}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-RANGE\_\-ALL\_\-VALID}\label{remix__types_8h_a14}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}(REMIX_RANGE_LOWER_BOUND_VALID | \
+                              REMIX_RANGE_UPPER_BOUND_VALID | \
+                              REMIX_RANGE_STEP_VALID)
+\end{verbatim}\normalsize 
+\index{remix_types.h@{remix\_\-types.h}!REMIX_RANGE_LOWER_BOUND_VALID@{REMIX\_\-RANGE\_\-LOWER\_\-BOUND\_\-VALID}}
+\index{REMIX_RANGE_LOWER_BOUND_VALID@{REMIX\_\-RANGE\_\-LOWER\_\-BOUND\_\-VALID}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-RANGE\_\-LOWER\_\-BOUND\_\-VALID\ (1$<$$<$0)}\label{remix__types_8h_a11}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_RANGE_STEP_VALID@{REMIX\_\-RANGE\_\-STEP\_\-VALID}}
+\index{REMIX_RANGE_STEP_VALID@{REMIX\_\-RANGE\_\-STEP\_\-VALID}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-RANGE\_\-STEP\_\-VALID\ (1$<$$<$2)}\label{remix__types_8h_a13}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_RANGE_UPPER_BOUND_VALID@{REMIX\_\-RANGE\_\-UPPER\_\-BOUND\_\-VALID}}
+\index{REMIX_RANGE_UPPER_BOUND_VALID@{REMIX\_\-RANGE\_\-UPPER\_\-BOUND\_\-VALID}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-RANGE\_\-UPPER\_\-BOUND\_\-VALID\ (1$<$$<$1)}\label{remix__types_8h_a12}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_SAMPLES@{REMIX\_\-SAMPLES}}
+\index{REMIX_SAMPLES@{REMIX\_\-SAMPLES}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-SAMPLES(x)\ (({\bf Remix\-Time})\{({\bf Remix\-Count})(x)\})}\label{remix__types_8h_a20}
+
+
+\index{remix_types.h@{remix\_\-types.h}!REMIX_SECONDS@{REMIX\_\-SECONDS}}
+\index{REMIX_SECONDS@{REMIX\_\-SECONDS}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define REMIX\_\-SECONDS(x)\ (({\bf Remix\-Time})\{(float)(x)\})}\label{remix__types_8h_a21}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixNone@{RemixNone}}
+\index{RemixNone@{RemixNone}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Remix\-None\ NULL}\label{remix__types_8h_a0}
+
+
+
+
+\subsection{Typedef Documentation}
+\index{remix_types.h@{remix\_\-types.h}!RemixBase@{RemixBase}}
+\index{RemixBase@{RemixBase}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Base}}\label{remix__types_8h_a27}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixChannel@{RemixChannel}}
+\index{RemixChannel@{RemixChannel}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Channel}}\label{remix__types_8h_a37}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixChunk@{RemixChunk}}
+\index{RemixChunk@{RemixChunk}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Chunk}}\label{remix__types_8h_a36}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixCount@{RemixCount}}
+\index{RemixCount@{RemixCount}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef long {\bf Remix\-Count}}\label{remix__types_8h_a25}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixDeck@{RemixDeck}}
+\index{RemixDeck@{RemixDeck}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Deck}}\label{remix__types_8h_a39}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixEnv@{RemixEnv}}
+\index{RemixEnv@{RemixEnv}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Env}}\label{remix__types_8h_a33}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixEnvelope@{RemixEnvelope}}
+\index{RemixEnvelope@{RemixEnvelope}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Envelope}}\label{remix__types_8h_a35}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixError@{RemixError}}
+\index{RemixError@{RemixError}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf Remix\-Error}}\label{remix__types_8h_a23}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixFlags@{RemixFlags}}
+\index{RemixFlags@{RemixFlags}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf Remix\-Flags}}\label{remix__types_8h_a29}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixLayer@{RemixLayer}}
+\index{RemixLayer@{RemixLayer}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Layer}}\label{remix__types_8h_a41}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixMetaAuthor@{RemixMetaAuthor}}
+\index{RemixMetaAuthor@{RemixMetaAuthor}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Meta\-Author}}\label{remix__types_8h_a43}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixMetaText@{RemixMetaText}}
+\index{RemixMetaText@{RemixMetaText}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Meta\-Text}}\label{remix__types_8h_a44}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixMonitor@{RemixMonitor}}
+\index{RemixMonitor@{RemixMonitor}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Monitor}}\label{remix__types_8h_a47}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixOpaque@{RemixOpaque}}
+\index{RemixOpaque@{RemixOpaque}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef void {\bf Remix\-Opaque}}\label{remix__types_8h_a26}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixParameter@{RemixParameter}}
+\index{RemixParameter@{RemixParameter}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef CDScalar {\bf Remix\-Parameter}}\label{remix__types_8h_a28}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixPCM@{RemixPCM}}
+\index{RemixPCM@{RemixPCM}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef float {\bf Remix\-PCM}}\label{remix__types_8h_a24}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixPlugin@{RemixPlugin}}
+\index{RemixPlugin@{RemixPlugin}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Plugin}}\label{remix__types_8h_a45}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixPoint@{RemixPoint}}
+\index{RemixPoint@{RemixPoint}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Point}}\label{remix__types_8h_a34}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixSamplerate@{RemixSamplerate}}
+\index{RemixSamplerate@{RemixSamplerate}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef double {\bf Remix\-Samplerate}}\label{remix__types_8h_a30}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixSound@{RemixSound}}
+\index{RemixSound@{RemixSound}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Sound}}\label{remix__types_8h_a42}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixSquareTone@{RemixSquareTone}}
+\index{RemixSquareTone@{RemixSquareTone}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Square\-Tone}}\label{remix__types_8h_a46}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixStream@{RemixStream}}
+\index{RemixStream@{RemixStream}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Stream}}\label{remix__types_8h_a38}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixTempo@{RemixTempo}}
+\index{RemixTempo@{RemixTempo}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef double {\bf Remix\-Tempo}}\label{remix__types_8h_a31}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixTime@{RemixTime}}
+\index{RemixTime@{RemixTime}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef union {\bf \_\-Remix\-Time} {\bf Remix\-Time}}\label{remix__types_8h_a32}
+
+
+\index{remix_types.h@{remix\_\-types.h}!RemixTrack@{RemixTrack}}
+\index{RemixTrack@{RemixTrack}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Remix\-Opaque} {\bf Remix\-Track}}\label{remix__types_8h_a40}
+
+
+
+
+\subsection{Enumeration Type Documentation}
+\index{remix_types.h@{remix\_\-types.h}!RemixChannelName@{RemixChannelName}}
+\index{RemixChannelName@{RemixChannelName}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Remix\-Channel\-Name}}\label{remix__types_8h_a70}
+
+
+\begin{Desc}
+\item[Enumeration values: ]\par
+\begin{description}
+\index{REMIX_CHANNEL_LEFT@{REMIX\_\-CHANNEL\_\-LEFT}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CHANNEL_LEFT@{REMIX\_\-CHANNEL\_\-LEFT}}\item[{\em 
+REMIX\_\-CHANNEL\_\-LEFT\label{remix__types_8h_a70a48}
+}]\index{REMIX_CHANNEL_RIGHT@{REMIX\_\-CHANNEL\_\-RIGHT}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CHANNEL_RIGHT@{REMIX\_\-CHANNEL\_\-RIGHT}}\item[{\em 
+REMIX\_\-CHANNEL\_\-RIGHT\label{remix__types_8h_a70a49}
+}]\index{REMIX_CHANNEL_CENTRE@{REMIX\_\-CHANNEL\_\-CENTRE}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CHANNEL_CENTRE@{REMIX\_\-CHANNEL\_\-CENTRE}}\item[{\em 
+REMIX\_\-CHANNEL\_\-CENTRE\label{remix__types_8h_a70a50}
+}]\index{REMIX_CHANNEL_REAR@{REMIX\_\-CHANNEL\_\-REAR}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CHANNEL_REAR@{REMIX\_\-CHANNEL\_\-REAR}}\item[{\em 
+REMIX\_\-CHANNEL\_\-REAR\label{remix__types_8h_a70a51}
+}]\index{REMIX_CHANNEL_REAR_LEFT@{REMIX\_\-CHANNEL\_\-REAR\_\-LEFT}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CHANNEL_REAR_LEFT@{REMIX\_\-CHANNEL\_\-REAR\_\-LEFT}}\item[{\em 
+REMIX\_\-CHANNEL\_\-REAR\_\-LEFT\label{remix__types_8h_a70a52}
+}]\index{REMIX_CHANNEL_REAR_RIGHT@{REMIX\_\-CHANNEL\_\-REAR\_\-RIGHT}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CHANNEL_REAR_RIGHT@{REMIX\_\-CHANNEL\_\-REAR\_\-RIGHT}}\item[{\em 
+REMIX\_\-CHANNEL\_\-REAR\_\-RIGHT\label{remix__types_8h_a70a53}
+}]\index{REMIX_CHANNEL_REAR_CENTRE@{REMIX\_\-CHANNEL\_\-REAR\_\-CENTRE}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CHANNEL_REAR_CENTRE@{REMIX\_\-CHANNEL\_\-REAR\_\-CENTRE}}\item[{\em 
+REMIX\_\-CHANNEL\_\-REAR\_\-CENTRE\label{remix__types_8h_a70a54}
+}]\index{REMIX_CHANNEL_LFE@{REMIX\_\-CHANNEL\_\-LFE}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CHANNEL_LFE@{REMIX\_\-CHANNEL\_\-LFE}}\item[{\em 
+REMIX\_\-CHANNEL\_\-LFE\label{remix__types_8h_a70a55}
+}]\end{description}
+\end{Desc}
+
+\index{remix_types.h@{remix\_\-types.h}!RemixConstraintType@{RemixConstraintType}}
+\index{RemixConstraintType@{RemixConstraintType}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Remix\-Constraint\-Type}}\label{remix__types_8h_a74}
+
+
+\begin{Desc}
+\item[Enumeration values: ]\par
+\begin{description}
+\index{REMIX_CONSTRAINT_TYPE_NONE@{REMIX\_\-CONSTRAINT\_\-TYPE\_\-NONE}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CONSTRAINT_TYPE_NONE@{REMIX\_\-CONSTRAINT\_\-TYPE\_\-NONE}}\item[{\em 
+REMIX\_\-CONSTRAINT\_\-TYPE\_\-NONE\label{remix__types_8h_a74a67}
+}]\index{REMIX_CONSTRAINT_TYPE_LIST@{REMIX\_\-CONSTRAINT\_\-TYPE\_\-LIST}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CONSTRAINT_TYPE_LIST@{REMIX\_\-CONSTRAINT\_\-TYPE\_\-LIST}}\item[{\em 
+REMIX\_\-CONSTRAINT\_\-TYPE\_\-LIST\label{remix__types_8h_a74a68}
+}]\index{REMIX_CONSTRAINT_TYPE_RANGE@{REMIX\_\-CONSTRAINT\_\-TYPE\_\-RANGE}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_CONSTRAINT_TYPE_RANGE@{REMIX\_\-CONSTRAINT\_\-TYPE\_\-RANGE}}\item[{\em 
+REMIX\_\-CONSTRAINT\_\-TYPE\_\-RANGE\label{remix__types_8h_a74a69}
+}]\end{description}
+\end{Desc}
+
+\index{remix_types.h@{remix\_\-types.h}!RemixEnvelopeType@{RemixEnvelopeType}}
+\index{RemixEnvelopeType@{RemixEnvelopeType}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Remix\-Envelope\-Type}}\label{remix__types_8h_a72}
+
+
+\begin{Desc}
+\item[Enumeration values: ]\par
+\begin{description}
+\index{REMIX_ENVELOPE_LINEAR@{REMIX\_\-ENVELOPE\_\-LINEAR}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_ENVELOPE_LINEAR@{REMIX\_\-ENVELOPE\_\-LINEAR}}\item[{\em 
+REMIX\_\-ENVELOPE\_\-LINEAR\label{remix__types_8h_a72a60}
+}]\index{REMIX_ENVELOPE_SPLINE@{REMIX\_\-ENVELOPE\_\-SPLINE}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_ENVELOPE_SPLINE@{REMIX\_\-ENVELOPE\_\-SPLINE}}\item[{\em 
+REMIX\_\-ENVELOPE\_\-SPLINE\label{remix__types_8h_a72a61}
+}]\end{description}
+\end{Desc}
+
+\index{remix_types.h@{remix\_\-types.h}!RemixParameterType@{RemixParameterType}}
+\index{RemixParameterType@{RemixParameterType}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Remix\-Parameter\-Type}}\label{remix__types_8h_a73}
+
+
+\begin{Desc}
+\item[Enumeration values: ]\par
+\begin{description}
+\index{REMIX_TYPE_BOOL@{REMIX\_\-TYPE\_\-BOOL}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TYPE_BOOL@{REMIX\_\-TYPE\_\-BOOL}}\item[{\em 
+REMIX\_\-TYPE\_\-BOOL\label{remix__types_8h_a73a62}
+}]\index{REMIX_TYPE_INT@{REMIX\_\-TYPE\_\-INT}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TYPE_INT@{REMIX\_\-TYPE\_\-INT}}\item[{\em 
+REMIX\_\-TYPE\_\-INT\label{remix__types_8h_a73a63}
+}]\index{REMIX_TYPE_FLOAT@{REMIX\_\-TYPE\_\-FLOAT}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TYPE_FLOAT@{REMIX\_\-TYPE\_\-FLOAT}}\item[{\em 
+REMIX\_\-TYPE\_\-FLOAT\label{remix__types_8h_a73a64}
+}]\index{REMIX_TYPE_STRING@{REMIX\_\-TYPE\_\-STRING}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TYPE_STRING@{REMIX\_\-TYPE\_\-STRING}}\item[{\em 
+REMIX\_\-TYPE\_\-STRING\label{remix__types_8h_a73a65}
+}]\index{REMIX_TYPE_BASE@{REMIX\_\-TYPE\_\-BASE}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TYPE_BASE@{REMIX\_\-TYPE\_\-BASE}}\item[{\em 
+REMIX\_\-TYPE\_\-BASE\label{remix__types_8h_a73a66}
+}]\end{description}
+\end{Desc}
+
+\index{remix_types.h@{remix\_\-types.h}!RemixTimeType@{RemixTimeType}}
+\index{RemixTimeType@{RemixTimeType}!remix_types.h@{remix\_\-types.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Remix\-Time\-Type}}\label{remix__types_8h_a71}
+
+
+\begin{Desc}
+\item[Enumeration values: ]\par
+\begin{description}
+\index{REMIX_TIME_INVALID@{REMIX\_\-TIME\_\-INVALID}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TIME_INVALID@{REMIX\_\-TIME\_\-INVALID}}\item[{\em 
+REMIX\_\-TIME\_\-INVALID\label{remix__types_8h_a71a56}
+}]\index{REMIX_TIME_SAMPLES@{REMIX\_\-TIME\_\-SAMPLES}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TIME_SAMPLES@{REMIX\_\-TIME\_\-SAMPLES}}\item[{\em 
+REMIX\_\-TIME\_\-SAMPLES\label{remix__types_8h_a71a57}
+}]\index{REMIX_TIME_SECONDS@{REMIX\_\-TIME\_\-SECONDS}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TIME_SECONDS@{REMIX\_\-TIME\_\-SECONDS}}\item[{\em 
+REMIX\_\-TIME\_\-SECONDS\label{remix__types_8h_a71a58}
+}]\index{REMIX_TIME_BEAT24S@{REMIX\_\-TIME\_\-BEAT24S}!remix_types.h@{remix\_\-types.h}}\index{remix_types.h@{remix\_\-types.h}!REMIX_TIME_BEAT24S@{REMIX\_\-TIME\_\-BEAT24S}}\item[{\em 
+REMIX\_\-TIME\_\-BEAT24S\label{remix__types_8h_a71a59}
+}]\end{description}
+\end{Desc}
+
