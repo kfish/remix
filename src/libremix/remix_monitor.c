@@ -41,6 +41,7 @@
 #include <config.h>
 
 #if (HAVE_ALSA == 1)
+#define ALSA_PCM_OLD_HW_PARAMS_API
 #include <alsa/asoundlib.h>
 #else
 typedef void snd_pcm_t;

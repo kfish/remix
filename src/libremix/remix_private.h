@@ -36,10 +36,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#if (HAVE_ALSA == 1)
-#include <alsa/asoundlib.h>
-#endif
-
 #include "ctxdata.h"
 
 #include "remix_compat.h"
@@ -173,6 +169,11 @@ typedef struct _RemixMonitor RemixMonitor;
 
 #define REMIX_MONITOR_BUFFERLEN 2048
 
+/* Opaque type from <alsa/pcm.h> */
+#ifndef __ALSA_PCM_H
+typedef struct _snd_pcm snd_pcm_t;
+#endif
+
 struct _RemixMonitor {
   RemixBase base;
   RemixPCM databuffer[REMIX_MONITOR_BUFFERLEN];
@@ -185,11 +186,7 @@ struct _RemixMonitor {
   int frequency;
   int numfrags;
   int fragsize;
-#if (HAVE_ALSA == 1)
   snd_pcm_t *alsa_dev;
-#else
-  void *alsa_dev;
-#endif
 };
 
 #define _remix_time_zero(t) (RemixTime)\
