@@ -233,15 +233,23 @@ char * remix_get_name (RemixEnv * env, RemixBase * base);
 #include <remix/remix_stream.h>
 
 /* SquareTone */
-RemixSquareTone * remix_squaretone_new (RemixEnv * env, float frequency);
+RemixBase * remix_squaretone_new (RemixEnv * env, float frequency);
 float remix_squaretone_set_frequency (RemixEnv * env,
-				      RemixSquareTone * squaretone,
+				      RemixBase * squaretone,
 				      float frequency);
 float remix_squaretone_get_frequency (RemixEnv * env,
-				      RemixSquareTone * squaretone);
+				      RemixBase * squaretone);
 
 /* Monitor */
 RemixMonitor * remix_monitor_new (RemixEnv * env);
+
+/* Scrubby */
+RemixBase * remix_scrubby_new (RemixEnv * env);
+RemixBase * remix_scrubby_set_source (RemixEnv * env, RemixBase * scrubby,
+				      RemixBase * source);
+RemixBase * remix_scrubby_get_source (RemixEnv * env, RemixBase * scrubby);
+int remix_scrubby_set_direction (RemixEnv * env, RemixBase * scrubby, int direction);
+int remix_scrubby_get_direction (RemixEnv * env, RemixBase * scrubby);
 
 #include <remix/remix_time.h>
 

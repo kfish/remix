@@ -275,6 +275,10 @@ RemixCount remix_stream_chunkchunkchunkfuncify (RemixEnv * env,
 						void * data);
 
 /* RemixChannel */
+RemixChunk * remix_channel_get_chunk_at (RemixEnv * env,
+					 RemixChannel * channel,
+					 RemixCount offset);
+
 RemixCount remix_channel_chunkfuncify (RemixEnv * env, RemixChannel * channel,
 				       RemixCount count, RemixChunkFunc func,
 				       int channelname, void * data);
