@@ -95,10 +95,10 @@ static RemixBase *
 remix_squaretone_clone (RemixEnv * env, RemixBase * base)
 {
   RemixSquareTone * squaretone = (RemixSquareTone *)base;
-  RemixSquareTone * new_squaretone =
+  RemixBase * new_squaretone =
     remix_squaretone_new (env, squaretone->frequency);
-  remix_squaretone_optimise (env, new_squaretone);
-  return (RemixBase *)new_squaretone;
+  remix_squaretone_optimise (env, (RemixSquareTone *)new_squaretone);
+  return new_squaretone;
 }
 
 static int
