@@ -16,6 +16,19 @@ if test $HAVE_DOXYGEN = "false"; then
              AC_MSG_WARN([*** doxygen not found, docs will not be built])
 fi
 
+dnl
+dnl  Configuration option for building of experimental code.
+dnl
+
+ac_enable_experimental=no
+AC_ARG_ENABLE(experimental,
+     [  --enable-experimental   enable building of experimental code ],
+     [ ac_enable_experimental=yes ])
+
+if test "x${ac_enable_experimental}" = xyes ; then
+    AC_DEFINE(ANX_CONFIG_EXPERIMENTAL, [], [Define to build experimental code])
+fi
+
 dnl Checks for libraries.
 
 dnl
@@ -65,9 +78,15 @@ AC_TYPE_UID_T
 dnl Checks for library functions.
 AC_CHECK_FUNCS(strdup strerror)
 
-
-
-
+dnl Test for sys/soundcard.h -- if user doesn't have it, don't build remix_monitor
+HAVE_SYS_SOUNDCARD_H=0
+AC_CHECK_HEADERS(sys/soundcard.h)
+  if test "x${ac_cv_header_sys_soundcard_h}" = xyes ; then
+    HAVE_SYS_SOUNDCARD_H=1
+    BUILD_MONITOR=1
+  fi
+AC_SUBST(BUILD_MONITOR)
+AM_CONDITIONAL(BUILD_MONITOR, test -n "$BUILD_MONITOR")
 
 dnl Test for ALSA.
 
@@ -81,20 +100,19 @@ AC_CHECK_HEADERS(alsa/asoundlib.h)
 
 AC_DEFINE_UNQUOTED([HAVE_ALSA],${HAVE_ALSA}, [Set to 1 if using ALSA for sound output.])
 
-
-
-
-
+dnl
 dnl Set PACKAGE_PLUGIN_DIR in Makefiles and config.h.
-PACKAGE_PLUGIN_DIR=$libdir/remix
+dnl
+
+PACKAGE_PLUGIN_DIR="${libdir}/remix"
 AC_SUBST(PACKAGE_PLUGIN_DIR)
 if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PACKAGE_PLUGIN_DIR, "${ac_default_prefix}/lib/${PACKAGE}",
-    [Set the plugin directory for remix])
+  PACKAGE_PLUGIN_DIR="${ac_default_prefix}/lib/remix"
 else
-  AC_DEFINE_UNQUOTED(PACKAGE_PLUGIN_DIR, "${prefix}/lib/${PACKAGE}",
-    [Set the plugin directory for remix])
+  PACKAGE_PLUGIN_DIR="${prefix}/lib/remix"
 fi
+AC_DEFINE_UNQUOTED(PACKAGE_PLUGIN_DIR, "$PACKAGE_PLUGIN_DIR",
+    [Set the plugin directory for remix])
 
 dnl Use -Wall if we have gcc.
 changequote(,)dnl
@@ -133,6 +151,10 @@ AC_MSG_RESULT([
 
     Experimental code: ........... ${ac_enable_experimental}
 
+  Plugins:
+
+    ladspa noise
+
   Example programs (./src/examples):
 
     noisedemo sndfiledemo squaredemo
@@ -140,6 +162,7 @@ AC_MSG_RESULT([
   Installation paths:
 
     libremix: .................... ${prefix}/lib
+    Plugins: ..................... ${PACKAGE_PLUGIN_DIR}
     C header files: .............. ${prefix}/include/remix
     Documentation: ............... ${prefix}/share/doc/$PACKAGE
 
