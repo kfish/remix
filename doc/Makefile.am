@@ -48,5 +48,7 @@ install-data-local: doxygen-build.stamp
 uninstall-local:
 	rm -rf $(docdir)
 
-maintainer-clean-local:
+clean-local:
 	if test -d libremix; then rm -rf libremix; fi
+	if test -f doxygen-build.stamp; then rm -f doxygen-build.stamp; fi
+
