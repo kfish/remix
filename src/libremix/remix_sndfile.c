@@ -171,7 +171,7 @@ remix_sndfile_read_into_chunk (RemixEnv * env, RemixChunk * chunk,
   if (channelname == 0)
     remix_sndfile_read_update (env, sndfile, n);
 
-  n = si->pcm_n;
+  n = MIN (si->pcm_n, remaining);
   
   p = si->pcm;
   p += channelname;
