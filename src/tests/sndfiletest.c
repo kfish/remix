@@ -19,15 +19,9 @@
 
 #include <remix/remix.h>
 
+#include "tests.h"
+
 static void non_existant_file (void);
-
-int
-main (int argc, char ** argv)
-{
-  non_existant_file () ;
-
-  return 0;
-}
 
 static void
 non_existant_file (void)
@@ -38,8 +32,7 @@ non_existant_file (void)
   CDSet * sf_parms;
   int sf_path_key;
 
-  printf ("    Non existant file test ................... ") ;
-  fflush (stdout) ;
+  INFO ("Attempting to read non existant file") ;
   
   env = remix_init ();
   remix_set_tempo (env, 120);
@@ -51,11 +44,16 @@ non_existant_file (void)
   sf_parms = cd_set_insert (env, sf_parms, sf_path_key,
 		            CD_STRING("bad_file_name.wav"));
   if (sf_plugin == NULL) {
-    fprintf (stderr, "sf_plugin == NULL\n");
-    exit (1);
+    FAIL ("Newly created sndfile plugin NULL");
   }
 
   sf1 = remix_new (env, sf_plugin, sf_parms);
+}
 
-  puts ("ok");
+int
+main (int argc, char ** argv)
+{
+  non_existant_file () ;
+
+  return 0;
 }
