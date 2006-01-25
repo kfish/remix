@@ -169,11 +169,6 @@ typedef struct _RemixMonitor RemixMonitor;
 
 #define REMIX_MONITOR_BUFFERLEN 2048
 
-/* Opaque type from <alsa/pcm.h> */
-#ifndef __ALSA_PCM_H
-typedef struct _snd_pcm snd_pcm_t;
-#endif
-
 struct _RemixMonitor {
   RemixBase base;
   RemixPCM databuffer[REMIX_MONITOR_BUFFERLEN];
@@ -186,7 +181,6 @@ struct _RemixMonitor {
   int frequency;
   int numfrags;
   int fragsize;
-  snd_pcm_t *alsa_dev;
 };
 
 #define _remix_time_zero(t) (RemixTime)\

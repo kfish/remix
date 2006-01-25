@@ -88,18 +88,6 @@ AC_CHECK_HEADERS(sys/soundcard.h)
 AC_SUBST(BUILD_MONITOR)
 AM_CONDITIONAL(BUILD_MONITOR, test -n "$BUILD_MONITOR")
 
-dnl Test for ALSA.
-
-HAVE_ALSA=0
-AC_CHECK_HEADERS(alsa/asoundlib.h)
-  if test "x${ac_cv_header_alsa_asoundlib_h}" = xyes ; then
-    HAVE_ALSA=1
-    ALSA_LIBS="-lasound"
-    AC_SUBST(ALSA_LIBS)
-  fi
-
-AC_DEFINE_UNQUOTED([HAVE_ALSA],${HAVE_ALSA}, [Set to 1 if using ALSA for sound output.])
-
 dnl
 dnl Set PACKAGE_PLUGIN_DIR in Makefiles and config.h.
 dnl

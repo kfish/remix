@@ -15,10 +15,10 @@ cd_list_test_SOURCES = cd_list_test.c
 cd_list_test_LDADD = ../ctxdata/libctxdata.la
 
 noisedemo_SOURCES = noisedemo.c
-noisedemo_LDADD = $(REMIX_LIBS) @ALSA_LIBS@
+noisedemo_LDADD = $(REMIX_LIBS)
 
 squaredemo_SOURCES = squaredemo.c
-squaredemo_LDADD = $(REMIX_LIBS) @ALSA_LIBS@
+squaredemo_LDADD = $(REMIX_LIBS)
 
 sndfiledemo_SOURCES = sndfiledemo.c
-sndfiledemo_LDADD = $(REMIX_LIBS) @SNDFILE_LIBS@ @ALSA_LIBS@
+sndfiledemo_LDADD = $(REMIX_LIBS) @SNDFILE_LIBS@

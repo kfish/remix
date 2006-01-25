@@ -7,5 +7,5 @@ Name: remix
 Description: An audio rendering library
 Requires: ctxdata sndfile
 Version: @VERSION@
-Libs: -L${libdir} -lremix -ldl @ALSA_LIBS@
+Libs: -L${libdir} -lremix -ldl
 Cflags: -I${includedir}
