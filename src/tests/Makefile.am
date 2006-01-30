@@ -8,6 +8,8 @@ REMIX_LIBS = ../ctxdata/libctxdata.la ../libremix/libremix.la -ldl
 
 # Test programs
 
+TESTS_ENVIRONMENT = $(VALGRIND_ENVIRONMENT)
+
 test: check
 
 TESTS = noop sndfiletest

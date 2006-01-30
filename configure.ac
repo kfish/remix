@@ -16,6 +16,30 @@ if test $HAVE_DOXYGEN = "false"; then
              AC_MSG_WARN([*** doxygen not found, docs will not be built])
 fi
 
+# Check for valgrind
+VALGRIND_ENVIRONMENT=""
+ac_enable_valgrind=no
+AC_ARG_ENABLE(valgrind-testing,
+     [  --enable-valgrind-testing     enable running of tests inside Valgrind ],     [ ac_enable_valgrind=yes ], [ ac_enable_valgrind=no] )
+
+if test "x${ac_enable_valgrind}" = xyes ; then
+  if test "x${enable_shared}" = xyes ; then
+    VALGRIND_ENVIRONMENT="libtool --mode=execute "
+  fi
+
+  AC_CHECK_PROG(HAVE_VALGRIND, valgrind, yes, no)
+  if test "x$HAVE_VALGRIND" = xyes ; then
+    VALGRIND_ENVIRONMENT="$VALGRIND_ENVIRONMENT valgrind -q --leak-check=yes --show-reachable=yes --num-callers=100"
+    AC_SUBST(VALGRIND_ENVIRONMENT)
+    TESTS_INFO="'make check' test suite will be run under:
+  ${VALGRIND_ENVIRONMENT}"
+  else
+    TESTS_INFO="'make check' to run test suite (Valgrind not found)"
+  fi
+else
+  TESTS_INFO="'make check' to run test suite (Valgrind testing not enabled)"
+fi
+
 dnl
 dnl  Configuration option for building of experimental code.
 dnl
