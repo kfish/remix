@@ -179,6 +179,13 @@ remix_gain_optimise (RemixEnv * env, RemixBase * gain)
   return gain;
 }
 
+static int
+remix_gain_plugin_destroy (RemixEnv * env, RemixPlugin * plugin)
+{
+  cd_set_free (env, plugin->process_scheme);
+  return 0;
+}
+
 static struct _RemixParameterScheme gain_envelope_scheme = {
   "Gain envelope",
   "An envelope to control the amplitude",
@@ -205,6 +212,7 @@ static struct _RemixPlugin gain_plugin = {
   CD_EMPTY_SET, /* process_scheme */
   NULL, /* suggests */
   NULL, /* plugin_data */
+  remix_gain_plugin_destroy /* destroy */
 };
 
 /* module init function */

@@ -386,6 +386,7 @@ static struct _RemixPlugin sndfile_reader_plugin = {
   CD_EMPTY_SET, /* process scheme */
   NULL, /* suggests */
   NULL, /* plugin data */
+  NULL  /* destroy */
 };
 
 static struct _RemixPlugin sndfile_writer_plugin = {
@@ -396,6 +397,7 @@ static struct _RemixPlugin sndfile_writer_plugin = {
   CD_EMPTY_SET, /* process scheme */
   NULL, /* suggests */
   NULL, /* plugin data */
+  NULL  /* destroy */
 };
 
 /* module init function */

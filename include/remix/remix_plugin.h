@@ -82,6 +82,7 @@ typedef RemixOpaque RemixMonitor;
 
 
 typedef CDList * (*RemixPluginInitFunc) (RemixEnv * env);
+typedef int (*RemixPluginDestroyFunc) (RemixEnv * env, RemixPlugin * plugin);
 
 typedef RemixBase * (*RemixInitFunc) (RemixEnv * env, RemixBase * base,
 				      CDSet * parameters);
@@ -187,6 +188,7 @@ struct _RemixPlugin {
   CDSet * process_scheme;
   RemixSuggestFunc suggest;
   void * plugin_data;
+  RemixPluginDestroyFunc destroy;
 };
 
 struct _RemixMethods {

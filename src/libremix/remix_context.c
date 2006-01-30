@@ -32,12 +32,24 @@
 #include "remix.h"
 
 static void
+remix_plugin_destroy (RemixEnv * env, RemixPlugin * plugin)
+{
+  if (plugin->destroy) {
+    plugin->destroy (env, plugin);
+  }
+}
+
+static void
 remix_context_destroy (RemixEnv * env)
 {
   RemixContext * ctx = env->context;
   RemixWorld * world = env->world;
 
   world->purging = 1;
+
+  cd_list_apply (env, world->plugins, (CDFunc)remix_plugin_destroy);
+  world->plugins = cd_list_free (env, world->plugins);
+
   /* XXX: remix_destroy_list (env, world->plugins); */
   /* XXX:  remix_destroy_list (env, world->bases); */
   remix_channelset_defaults_destroy (env);

@@ -931,6 +931,8 @@ ladspa_wrapper_load_plugins (RemixEnv * env, char * dir, char * name)
 
       plugin->plugin_data = (void *)d;
 
+      plugin->destroy = NULL;
+
       plugins = cd_list_append (env, plugins, CD_POINTER(plugin));
     }
   }

@@ -128,6 +128,7 @@ static struct _RemixPlugin noise_plugin = {
   CD_EMPTY_SET, /* process scheme */
   NULL, /* suggests */
   NULL, /* plugin data */
+  NULL  /* destroy */
 };
 
 CDList *
