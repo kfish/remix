@@ -105,6 +105,8 @@ init_dynamic_plugins_dir (RemixEnv * env, char * dirname)
     }
   }
 
+  closedir (dir);
+
   return plugins;
 }
 
