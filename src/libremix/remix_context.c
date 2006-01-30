@@ -40,6 +40,7 @@ remix_context_destroy (RemixEnv * env)
   world->purging = 1;
   /* XXX: remix_destroy_list (env, world->plugins); */
   /* XXX:  remix_destroy_list (env, world->bases); */
+  remix_channelset_defaults_destroy (env);
   remix_free (ctx);
   remix_free (world);
 }
@@ -129,7 +130,7 @@ remix_init (void)
   ctx->tempo = REMIX_DEFAULT_TEMPO;
 
   env = remix_add_thread_context (ctx, world);
-  remix_channelset_initialise_defaults (env);
+  remix_channelset_defaults_initialise (env);
   ctx->channels = REMIX_MONO;
 
   remix_plugin_initialise_defaults (env);

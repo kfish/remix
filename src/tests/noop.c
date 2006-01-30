@@ -29,5 +29,8 @@ main (int argc, char ** argv)
   INFO ("+ Creating new RemixEnv");
   env = remix_init ();
 
+  INFO ("+ Purging RemixEnv");
+  remix_purge (env);
+
   return 0;
 }

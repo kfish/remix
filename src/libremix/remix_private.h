@@ -285,7 +285,7 @@ RemixEnv * _remix_register_base (RemixEnv * env, RemixBase * base);
 RemixEnv * _remix_unregister_base (RemixEnv * env, RemixBase * base);
 
 /* remix_plugin */
-void remix_plugin_initialise_defaults (RemixEnv * env);
+void remix_plugin_defaults_initialise (RemixEnv * env);
 
 /* remix_deck */
 RemixTrack * _remix_deck_add_track (RemixEnv * env, RemixDeck * deck,
@@ -360,6 +360,7 @@ RemixCount remix_channel_mix (RemixEnv * env, RemixChannel * src,
 
 /* remix_channelset */
 void remix_channelset_initialise_defaults (RemixEnv * env);
+void remix_channelset_defaults_destroy (RemixEnv * env);
 
 /* remix_chunk */
 RemixChunk * remix_chunk_new (RemixEnv * env, RemixCount start_index,

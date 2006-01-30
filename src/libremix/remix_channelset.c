@@ -33,7 +33,7 @@ CDSet * REMIX_MONO = RemixNone;
 CDSet * REMIX_STEREO = RemixNone;
 
 void
-remix_channelset_initialise_defaults (RemixEnv * env)
+remix_channelset_defaults_initialise (RemixEnv * env)
 {
   if (REMIX_MONO == NULL) {
     REMIX_MONO = cd_set_new (env);
@@ -50,4 +50,18 @@ remix_channelset_initialise_defaults (RemixEnv * env)
   }
 
   return;
+}
+
+void
+remix_channelset_defaults_destroy (RemixEnv * env)
+{
+  if (REMIX_MONO != NULL) {
+    cd_set_free (env, REMIX_MONO);
+    REMIX_MONO = NULL;
+  }
+
+  if (REMIX_STEREO != NULL) {
+    cd_set_free (env, REMIX_STEREO);
+    REMIX_STEREO = NULL;
+  }
 }
