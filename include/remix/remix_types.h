@@ -81,7 +81,7 @@ typedef enum {
   REMIX_CHANNEL_REAR_LEFT,
   REMIX_CHANNEL_REAR_RIGHT,
   REMIX_CHANNEL_REAR_CENTRE,
-  REMIX_CHANNEL_LFE /* Low Frequency Effects */,
+  REMIX_CHANNEL_LFE /* Low Frequency Effects */
 } RemixChannelName;
 
 typedef enum {
@@ -109,13 +109,13 @@ typedef enum {
   REMIX_TYPE_INT,
   REMIX_TYPE_FLOAT,
   REMIX_TYPE_STRING,
-  REMIX_TYPE_BASE,
+  REMIX_TYPE_BASE
 } RemixParameterType;
 
 typedef enum {
   REMIX_CONSTRAINT_TYPE_NONE = 0,
   REMIX_CONSTRAINT_TYPE_LIST,
-  REMIX_CONSTRAINT_TYPE_RANGE,
+  REMIX_CONSTRAINT_TYPE_RANGE
 } RemixConstraintType;
 
 
