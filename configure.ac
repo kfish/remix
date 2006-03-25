@@ -92,7 +92,7 @@ else
   fi
 fi
 
-AM_CONDITIONAL(HAVE_LIBSNDFILE1,$HAVE_LIBSNDFILE1)
+AM_CONDITIONAL(HAVE_LIBSNDFILE1, test "x${HAVE_LIBSNDFILE1}" = xyes)
 
 
 dnl Checks for header files.
