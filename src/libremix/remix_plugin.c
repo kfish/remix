@@ -47,7 +47,10 @@ remix_plugin_initialise_static (RemixEnv * env)
   CDList * plugins = cd_list_new (env);
 
   plugins = cd_list_join (env, plugins, __gain_init (env));
+
+#ifdef HAVE_LIBSNDFILE1
   plugins = cd_list_join (env, plugins, __sndfile_init (env));
+#endif
 
   return plugins;
 }

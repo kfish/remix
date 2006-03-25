@@ -6,8 +6,13 @@ if BUILD_MONITOR
 monitor_sources = remix_monitor.c
 endif
 
+if HAVE_LIBSNDFILE1
+sndfile_sources = remix_sndfile.c
+endif
+
 libremix_la_SOURCES = \
 	$(monitor_sources) \
+	$(sndfile_sources) \
 	remix_base.c \
 	remix_channel.c \
 	remix_channelset.c \
@@ -23,7 +28,6 @@ libremix_la_SOURCES = \
 	remix_null.c \
 	remix_pcm.c \
 	remix_plugin.c \
-	remix_sndfile.c \
 	remix_sound.c \
 	remix_squaretone.c \
 	remix_stream.c \

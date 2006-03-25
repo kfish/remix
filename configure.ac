@@ -4,6 +4,8 @@ AC_INIT(src/libremix/remix_base.c)
 AM_INIT_AUTOMAKE(remix, 0.2.3)
 AM_CONFIG_HEADER(config.h)
 
+example_programs="noisedemo squaredemo"
+
 dnl Checks for programs.
 AM_PROG_LIBTOOL
 AC_PROG_INSTALL
@@ -67,9 +69,10 @@ if test "$HAVE_LIBSNDFILE1" = "yes" ; then
   AC_DEFINE([HAVE_LIBSNDFILE1], [], [Define if libsndfile version 1 found])
   AC_SUBST(SNDFILE_LIBS)
   AC_SUBST(SNDFILE_CFLAGS)
+  example_programs="${example_programs} sndfiledemo"
 else
-  AC_CHECK_LIB(sndfile, sf_open, SNDFILE_LIBS="maybe")
-  if test "$SNDFILE_LIBS" = "maybe" ; then
+  AC_CHECK_LIB(sndfile, sf_open, HAVE_LIBSNDFILE1="maybe")
+  if test "$HAVE_LIBSNDFILE1" = "maybe" ; then
     AC_MSG_ERROR([
 ***
 *** libsndfile-1.0.0 or greater seems to exist on your system, however
@@ -88,6 +91,8 @@ else
 ])
   fi
 fi
+
+AM_CONDITIONAL(HAVE_LIBSNDFILE1,$HAVE_LIBSNDFILE1)
 
 
 dnl Checks for header files.
@@ -169,7 +174,7 @@ AC_MSG_RESULT([
 
   Example programs (./src/examples):
 
-    noisedemo sndfiledemo squaredemo
+    ${example_programs}
 
   Installation paths:
 

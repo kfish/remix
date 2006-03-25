@@ -2,10 +2,14 @@
 INCLUDES = -I$(top_srcdir)/src/ctxdata -I$(top_srcdir)/include -I../ctxdata
 
 if BUILD_MONITOR
-monitor_programs = noisedemo squaredemo sndfiledemo
+monitor_programs = noisedemo squaredemo
+if HAVE_LIBSNDFILE1
+sndfile_programs = sndfiledemo
 endif
 
-noinst_PROGRAMS = cd_list_test $(monitor_programs)
+endif
+
+noinst_PROGRAMS = cd_list_test $(monitor_programs) $(sndfile_programs)
 
 EXTRA_DIST = 909_cl.wav 1052.wav
 
