@@ -36,5 +36,5 @@ libremix_la_SOURCES = \
 	remix_private.h \
 	remix_compat.h
 
-libremix_la_LIBADD = @SNDFILE_LIBS@ @ALSA_LIBS@
+libremix_la_LIBADD = @SNDFILE_LIBS@
 
