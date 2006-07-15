@@ -131,15 +131,18 @@ fi
 AC_DEFINE_UNQUOTED(PACKAGE_PLUGIN_DIR, "$PACKAGE_PLUGIN_DIR",
     [Set the plugin directory for remix])
 
+AC_ARG_ENABLE(gcc-werror,
+	AC_HELP_STRING([--enable-gcc-werror], [enable -Werror in all Makefiles]))
+
 dnl Use -Wall if we have gcc.
-changequote(,)dnl
-if test "x$GCC" = "xyes"; then
-  case " $CFLAGS " in
-  *[\ \ ]-Wall[\ \	]*) ;;
-  *) CFLAGS="$CFLAGS -Wall" ;;
-  esac
+if test "x$ac_cv_prog_gcc" = xyes ; then
+  CFLAGS="$CFLAGS -Wall"
+
+  if test x$enable_gcc_werror = "xyes" ; then
+    CFLAGS="$CFLAGS -Werror"
+	fi
+
 fi
-changequote([,])dnl
 
 AC_OUTPUT([
 Makefile
