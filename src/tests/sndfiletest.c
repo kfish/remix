@@ -31,6 +31,7 @@ non_existant_file (void)
   RemixPlugin * sf_plugin;
   CDSet * sf_parms;
   int sf_path_key;
+  CDScalar name;
 
   INFO ("Attempting to read non existant file") ;
   
@@ -41,8 +42,8 @@ non_existant_file (void)
   sf_plugin = remix_find_plugin (env, "builtin::sndfile_reader");
   sf_parms = cd_set_new (env);
   sf_path_key = remix_get_init_parameter_key (env, sf_plugin, "path");
-  sf_parms = cd_set_insert (env, sf_parms, sf_path_key,
-		            CD_STRING("bad_file_name.wav"));
+  name.s_string = "bad_file_name.wav" ;
+  sf_parms = cd_set_insert (env, sf_parms, sf_path_key, name);
   if (sf_plugin == NULL) {
     FAIL ("Newly created sndfile plugin NULL");
   }

@@ -145,7 +145,7 @@ remix_init (void)
   remix_channelset_defaults_initialise (env);
   ctx->channels = REMIX_MONO;
 
-  remix_plugin_initialise_defaults (env);
+  remix_plugin_defaults_initialise (env);
 
   return env;
 }

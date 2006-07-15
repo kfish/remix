@@ -120,7 +120,7 @@ remix_plugin_initialise_dynamic (RemixEnv * env)
 }
 
 void
-remix_plugin_initialise_defaults (RemixEnv * env)
+remix_plugin_defaults_initialise (RemixEnv * env)
 {
   CDList * plugins = cd_list_new (env);
 

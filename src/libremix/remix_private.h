@@ -359,7 +359,7 @@ RemixCount remix_channel_mix (RemixEnv * env, RemixChannel * src,
 
 
 /* remix_channelset */
-void remix_channelset_initialise_defaults (RemixEnv * env);
+void remix_channelset_defaults_initialise (RemixEnv * env);
 void remix_channelset_defaults_destroy (RemixEnv * env);
 
 /* remix_chunk */

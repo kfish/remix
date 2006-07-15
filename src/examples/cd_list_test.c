@@ -43,9 +43,9 @@ main (int argc, char ** argv)
 {
   CDList * list, * list2;
   void * ctx;
-  int a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8, i=9, j=10, k=11, l=12;
-  int m=13, n=14, o=15, p=16, q=17, r=18, s=19, t=20, u=21, v=22, w=23;
-  int x=24, y=25, z=26;
+  int a=1, b=2, d=4, f=6, g=7, k=11;
+  int v=22, w=23;
+  int z=26;
 
   ctx = NULL;
 
