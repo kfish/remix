@@ -186,6 +186,16 @@ AC_MSG_RESULT([
     C header files: .............. ${prefix}/include/remix
     Documentation: ............... ${prefix}/share/doc/$PACKAGE
 
+  Building:
+
+    Type 'make' to compile $PACKAGE.
+
+    Type 'make install' to install $PACKAGE.
+
+    Type 'make check' to test $PACKAGE using the unit tests
+    contained in the src/tests directory.
+    ${TESTS_INFO}
+
   Example programs will be built but not installed.
 ------------------------------------------------------------------------
 ])
