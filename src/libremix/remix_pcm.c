@@ -97,7 +97,8 @@ _remix_pcm_gain (RemixPCM * data, RemixCount count, void * gain)
  * Copy PCM data from src to dest.
  */
 RemixCount
-_remix_pcm_copy (RemixPCM * src, RemixPCM * dest, RemixCount count, void * unused)
+_remix_pcm_copy (RemixPCM * src, RemixPCM * dest, RemixCount count,
+                 void * unused)
 {
   memcpy (dest, src, count * sizeof (RemixPCM));
   return count;
@@ -109,7 +110,8 @@ _remix_pcm_copy (RemixPCM * src, RemixPCM * dest, RemixCount count, void * unuse
  * Add PCM data from src to dest.
  */
 RemixCount
-_remix_pcm_add (RemixPCM * src, RemixPCM * dest, RemixCount count, void * unused)
+_remix_pcm_add (RemixPCM * src, RemixPCM * dest, RemixCount count,
+                void * unused)
 {
   RemixCount i;
 
@@ -126,7 +128,8 @@ _remix_pcm_add (RemixPCM * src, RemixPCM * dest, RemixCount count, void * unused
  * Multiply PCM data of dest by that in src.
  */
 RemixCount
-_remix_pcm_mult (RemixPCM * src, RemixPCM * dest, RemixCount count, void * unused)
+_remix_pcm_mult (RemixPCM * src, RemixPCM * dest, RemixCount count,
+                 void * unused)
 {
   RemixCount i;
 
@@ -143,7 +146,8 @@ _remix_pcm_mult (RemixPCM * src, RemixPCM * dest, RemixCount count, void * unuse
  * Fade PCM data of dest by that in src.
  */
 RemixCount
-_remix_pcm_fade (RemixPCM * src, RemixPCM * dest, RemixCount count, void * unused)
+_remix_pcm_fade (RemixPCM * src, RemixPCM * dest, RemixCount count,
+                 void * unused)
 {
   RemixCount i;
 
@@ -160,7 +164,8 @@ _remix_pcm_fade (RemixPCM * src, RemixPCM * dest, RemixCount count, void * unuse
  * Interleave data of src1 and src2, storing result in dest
  */
 RemixCount
-_remix_pcm_interleave_2 (RemixPCM * src1, RemixPCM * src2, RemixCount count, void * data)
+_remix_pcm_interleave_2 (RemixPCM * src1, RemixPCM * src2, RemixCount count,
+                         void * data)
 {
   RemixPCM * dest = (RemixPCM *)data;
   RemixCount i;
@@ -179,7 +184,8 @@ _remix_pcm_interleave_2 (RemixPCM * src1, RemixPCM * src2, RemixCount count, voi
  * Deinterleave data of src, storing result in dest1 and dest2
  */
 RemixCount
-_remix_pcm_deinterleave_2 (RemixPCM * dest1, RemixPCM * dest2, RemixCount count, void * data)
+_remix_pcm_deinterleave_2 (RemixPCM * dest1, RemixPCM * dest2,
+                           RemixCount count, void * data)
 {
   RemixPCM * src = (RemixPCM *)data;
   RemixCount i;
@@ -200,8 +206,8 @@ _remix_pcm_deinterleave_2 (RemixPCM * dest1, RemixPCM * dest2, RemixCount count,
  * Blend PCM data of 'src' into 'dest' by blend values in 'blend'.
  */
 RemixCount
-_remix_pcm_blend (RemixPCM * src, RemixPCM * blend, RemixPCM * dest, RemixCount count,
-	       void * unused)
+_remix_pcm_blend (RemixPCM * src, RemixPCM * blend, RemixPCM * dest,
+                  RemixCount count, void * unused)
 {
   RemixCount i;
   RemixPCM b, d;
@@ -225,13 +231,14 @@ _remix_pcm_blend (RemixPCM * src, RemixPCM * blend, RemixPCM * dest, RemixCount 
  * and (x2, y2), with writing starting at x = 'offset'.
  */
 RemixCount
-_remix_pcm_write_linear (RemixPCM * data, RemixCount x1, RemixPCM y1, RemixCount x2, RemixPCM y2,
-		      RemixCount offset, RemixCount count)
+_remix_pcm_write_linear (RemixPCM * data, RemixCount x1, RemixPCM y1,
+                         RemixCount x2, RemixPCM y2,
+                         RemixCount offset, RemixCount count)
 {
   RemixCount i;
 
   remix_dprintf ("[remix_pcm_write_linear] ((%ld, %f) -> (%ld, %f), %ld +%ld)\n",
-	  x1, y1, x2, y2, offset, count);
+                 x1, y1, x2, y2, offset, count);
 
   for (i = 0; i < count; i++) {
     *data++ = y1 + (RemixPCM)(i + offset - x1) * (y2 - y1) / (x2 - x1);

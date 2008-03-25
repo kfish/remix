@@ -105,7 +105,8 @@ remix_sound_clone_invalid (RemixEnv * env, RemixBase * base)
 }
 
 RemixBase *
-remix_sound_clone_with_layer (RemixEnv * env, RemixBase * base, RemixLayer * new_layer)
+remix_sound_clone_with_layer (RemixEnv * env, RemixBase * base,
+                              RemixLayer * new_layer)
 {
   RemixSound * sound = (RemixSound *)base;
   RemixSound * new_sound = _remix_sound_new (env);
@@ -252,7 +253,8 @@ remix_sound_later (RemixEnv * env, RemixSound * s1, RemixSound * s2)
 }
 
 RemixTime
-remix_sound_set_start_time (RemixEnv * env, RemixSound * sound, RemixTime start_time)
+remix_sound_set_start_time (RemixEnv * env, RemixSound * sound,
+                            RemixTime start_time)
 {
   RemixTime old = sound->start_time;
   RemixLayer * layer = sound->layer;
@@ -268,7 +270,8 @@ remix_sound_get_start_time (RemixEnv * env, RemixSound * sound)
 }
 
 RemixTime
-remix_sound_set_duration (RemixEnv * env, RemixSound * sound, RemixTime duration)
+remix_sound_set_duration (RemixEnv * env, RemixSound * sound,
+                          RemixTime duration)
 {
   RemixTime old = sound->duration;
   sound->duration = duration;
@@ -370,7 +373,8 @@ _remix_sound_fade (RemixEnv * env, RemixSound * sound, RemixCount count,
 /* Do rate conversion, handle offset etc.: get raw sound data */
 static RemixCount
 _remix_sound_get_raw (RemixEnv * env, RemixSound * sound, RemixCount offset,
-		     RemixCount count, RemixStream * input, RemixStream * output)
+                      RemixCount count, RemixStream * input,
+                      RemixStream * output)
 {
   RemixCount block, n;
 
@@ -453,8 +457,8 @@ _remix_sound_blend (RemixEnv * env, RemixSound * sound, RemixCount count,
 }
 
 static RemixCount
-remix_sound_process (RemixEnv * env, RemixBase * base, RemixCount count, RemixStream * input,
-                  RemixStream * output)
+remix_sound_process (RemixEnv * env, RemixBase * base, RemixCount count,
+                     RemixStream * input, RemixStream * output)
 {
   RemixSound * sound = (RemixSound *)base;
   RemixCount remaining = count, processed = 0, block, m, n;

@@ -201,8 +201,8 @@ remix_stream_remove_channel (RemixEnv * env, RemixStream * stream, int name)
 }
 
 RemixStream *
-remix_stream_add_chunks (RemixEnv * env, RemixStream * stream, RemixCount offset,
-		      RemixCount length)
+remix_stream_add_chunks (RemixEnv * env, RemixStream * stream,
+                         RemixCount offset, RemixCount length)
 {
   CDSet * s;
   RemixChannel * channel;
@@ -254,7 +254,7 @@ remix_stream_write0 (RemixEnv * env, RemixStream * stream, RemixCount count)
  */
 static RemixCount
 remix_stream_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		   RemixStream * input, RemixStream * output)
+                      RemixStream * input, RemixStream * output)
 {
   RemixStream * stream = (RemixStream *)base;
   return remix_stream_write (env, output, count, stream);
@@ -399,9 +399,9 @@ remix_stream_chunkchunkfuncify (RemixEnv * env, RemixStream * src,
 
 RemixCount
 remix_stream_chunkchunkchunkfuncify (RemixEnv * env,
-				  RemixStream * src1, RemixStream * src2,
-				  RemixStream * dest, RemixCount count,
-				  RemixChunkChunkChunkFunc func, void * data)
+                                     RemixStream * src1, RemixStream * src2,
+                                     RemixStream * dest, RemixCount count,
+                                     RemixChunkChunkChunkFunc func, void * data)
 {
   RemixCount n, minn = count;
   RemixCount src1_offset = remix_tell (env, (RemixBase *)src1);
@@ -439,9 +439,11 @@ remix_stream_chunkchunkchunkfuncify (RemixEnv * env,
  * remix_stream_gain (env, src, dest, count, gain)
  */
 RemixCount
-remix_stream_gain (RemixEnv * env, RemixStream * stream, RemixCount count, RemixPCM gain)
+remix_stream_gain (RemixEnv * env, RemixStream * stream, RemixCount count,
+                   RemixPCM gain)
 {
-  return remix_stream_chunkfuncify (env, stream, count, _remix_chunk_gain, &gain);
+  return remix_stream_chunkfuncify (env, stream, count,
+                                   _remix_chunk_gain, &gain);
 }
 
 /*
@@ -450,12 +452,13 @@ remix_stream_gain (RemixEnv * env, RemixStream * stream, RemixCount count, Remix
  * Copy 'count' samples from 'src' to 'dest'
  */
 RemixCount
-remix_stream_copy (RemixEnv * env, RemixStream * src, RemixStream * dest, RemixCount count)
+remix_stream_copy (RemixEnv * env, RemixStream * src, RemixStream * dest,
+                   RemixCount count)
 {
   remix_dprintf ("[remix_stream_copy] (%p -> %p, +%ld)\n", src, dest, count);
 
   return remix_stream_chunkchunkfuncify (env, src, dest, count,
-				      _remix_chunk_copy, NULL);
+                                         _remix_chunk_copy, NULL);
 }
 
 /*
@@ -466,7 +469,7 @@ remix_stream_copy (RemixEnv * env, RemixStream * src, RemixStream * dest, RemixC
 /* XXX: this is a wrapper to obsolete remix_stream_write above */
 RemixCount
 remix_stream_write (RemixEnv * env, RemixStream * stream, RemixCount count,
-		 RemixStream * data)
+                    RemixStream * data)
 {
   remix_dprintf ("[remix_stream_write] (%p -> %p, +%ld)\n", data, stream, count);
 
@@ -482,12 +485,13 @@ remix_stream_write (RemixEnv * env, RemixStream * stream, RemixCount count,
  * Mix 'count' samples from 'src' into 'dest'.
  */
 RemixCount
-remix_stream_mix (RemixEnv * env, RemixStream * src, RemixStream * dest, RemixCount count)
+remix_stream_mix (RemixEnv * env, RemixStream * src, RemixStream * dest,
+                  RemixCount count)
 {
   remix_dprintf ("[remix_stream_mix] (%p -> %p, +%ld)\n", src, dest, count);
 
   return remix_stream_chunkchunkfuncify (env, src, dest, count,
-				      _remix_chunk_add_inplace, NULL);
+                                         _remix_chunk_add_inplace, NULL);
 }
 
 /*
@@ -496,7 +500,8 @@ remix_stream_mix (RemixEnv * env, RemixStream * src, RemixStream * dest, RemixCo
  * Multiply 'count' samples of 'src' into 'dest'.
  */
 RemixCount
-remix_stream_mult (RemixEnv * env, RemixStream * src, RemixStream * dest, RemixCount count)
+remix_stream_mult (RemixEnv * env, RemixStream * src, RemixStream * dest,
+                   RemixCount count)
 {
   remix_dprintf ("[remix_stream_mult] (%p -> %p, +%ld)\n", src, dest, count);
 
@@ -511,12 +516,12 @@ remix_stream_mult (RemixEnv * env, RemixStream * src, RemixStream * dest, RemixC
  */
 RemixCount
 remix_stream_fade (RemixEnv * env, RemixStream * src, RemixStream * dest,
-		  RemixCount count)
+                   RemixCount count)
 {
   remix_dprintf ("[remix_stream_fade] (%p -> %p, +%ld)\n", src, dest, count);
 
   return remix_stream_chunkchunkfuncify (env, src, dest, count,
-					_remix_chunk_fade_inplace, NULL);
+                                         _remix_chunk_fade_inplace, NULL);
 }
 
 /*
@@ -526,13 +531,13 @@ remix_stream_fade (RemixEnv * env, RemixStream * src, RemixStream * dest,
  */
 RemixCount
 remix_stream_blend (RemixEnv * env, RemixStream * src, RemixStream * blend,
-		   RemixStream * dest, RemixCount count)
+                    RemixStream * dest, RemixCount count)
 {
   remix_dprintf ("[remix_stream_blend] (%p -> (%p) -> %p, +%ld)\n", src, blend,
 	      dest, count);
 
   return remix_stream_chunkchunkchunkfuncify (env, src, blend, dest, count,
-					     _remix_chunk_blend_inplace, NULL);
+                                              _remix_chunk_blend_inplace, NULL);
 }
 
 
@@ -544,7 +549,7 @@ remix_stream_blend (RemixEnv * env, RemixStream * src, RemixStream * blend,
  */
 RemixCount
 remix_streams_mix (RemixEnv * env, CDList * streams, RemixStream * dest,
-		  RemixCount count)
+                   RemixCount count)
 {
   CDList * sl;
   CDSet * s;
@@ -592,8 +597,8 @@ remix_streams_mix (RemixEnv * env, CDList * streams, RemixStream * dest,
  */
 RemixCount
 remix_stream_interleave_2 (RemixEnv * env, RemixStream * stream,
-			  int name1, int name2,
-			  RemixPCM * dest, RemixCount count)
+                           int name1, int name2,
+                           RemixPCM * dest, RemixCount count)
 {
   RemixChannel * channel1, * channel2;
   RemixCount n = 0;
@@ -621,8 +626,8 @@ remix_stream_interleave_2 (RemixEnv * env, RemixStream * stream,
  */
 RemixCount
 remix_stream_deinterleave_2 (RemixEnv * env, RemixStream * stream,
-			    int name1, int name2,
-			    RemixPCM * src, RemixCount count)
+                             int name1, int name2,
+                             RemixPCM * src, RemixCount count)
 {
   RemixChannel * channel1, * channel2;
   RemixCount n = 0;

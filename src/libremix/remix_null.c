@@ -21,7 +21,7 @@
  */
 
 /*
- * RemixNull: An RemixBase with no processing
+ * RemixNull: A RemixBase with no processing
  *
  * Conrad Parker <Conrad.Parker@CSIRO.AU>, August 2001
  *
@@ -55,7 +55,7 @@ remix_null_length (RemixEnv * env, RemixBase * base)
 
 RemixCount
 remix_null_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		 RemixStream * input, RemixStream * output)
+                    RemixStream * input, RemixStream * output)
 {
   remix_set_error (env, REMIX_ERROR_NOOP);
   return 0;

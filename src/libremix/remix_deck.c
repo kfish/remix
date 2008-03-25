@@ -147,7 +147,8 @@ remix_deck_length (RemixEnv * env, RemixBase * base)
   for (l = deck->tracks; l; l = l->next) {
     track = (RemixBase *)l->data.s_pointer;
     length = remix_length (env, track);
-    remix_dprintf ("[remix_deck_length] found track %p length %ld\n", track, length);
+    remix_dprintf ("[remix_deck_length] found track %p length %ld\n",
+                   track, length);
     maxlength = MAX (maxlength, length);
   }
 
@@ -210,7 +211,7 @@ remix_deck_process (RemixEnv * env, RemixBase base, RemixCount count, RemixStrea
 
 static RemixCount
 remix_deck_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		 RemixStream * input, RemixStream * output)
+                    RemixStream * input, RemixStream * output)
 {
   RemixDeck * deck = (RemixDeck *)base;
   CDList * l;
@@ -223,7 +224,7 @@ remix_deck_process (RemixEnv * env, RemixBase * base, RemixCount count,
   RemixStream * mixstream = deck->_mixstream;
 
   remix_dprintf ("PROCESS DECK (%p, +%ld, %p -> %p) @ %ld\n",
-	      deck, count, input, output, current_offset);
+                 deck, count, input, output, current_offset);
 
   while (remaining > 0) {
 
@@ -262,7 +263,7 @@ remix_deck_process (RemixEnv * env, RemixBase * base, RemixCount count,
 
 static RemixCount
 remix_deck_twotrack_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			  RemixStream * input, RemixStream * output)
+                             RemixStream * input, RemixStream * output)
 {
   RemixDeck * deck = (RemixDeck *)base;
   CDList * l;
@@ -274,7 +275,7 @@ remix_deck_twotrack_process (RemixEnv * env, RemixBase * base, RemixCount count,
   RemixStream * mixstream = deck->_mixstream;
 
   remix_dprintf ("PROCESS DECK [twotrack] (%p, +%ld, %p -> %p) @ %ld\n",
-	      deck, count, input, output, current_offset);
+                 deck, count, input, output, current_offset);
 
   l = deck->tracks;
   track1 = (RemixTrack *)l->data.s_pointer;
@@ -305,19 +306,19 @@ remix_deck_twotrack_process (RemixEnv * env, RemixBase * base, RemixCount count,
 
 static RemixCount
 remix_deck_onetrack_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			  RemixStream * input, RemixStream * output)
+                             RemixStream * input, RemixStream * output)
 {
   RemixDeck * deck = (RemixDeck *)base;
   RemixTrack * track = (RemixTrack *)deck->tracks->data.s_pointer;
   RemixCount n;
 
   remix_dprintf ("PROCESS DECK [onetrack] (%p, +%ld, %p -> %p) @ %ld\n",
-	      deck, count, input, output, remix_tell (env, base));
+                 deck, count, input, output, remix_tell (env, base));
 
   n = remix_process (env, (RemixBase *)track, count, input, output);
 
   remix_dprintf ("*** deck @ %ld\ttrack @ %ld\n", remix_tell (env, base),
-              remix_tell (env, (RemixBase *)track));
+                 remix_tell (env, (RemixBase *)track));
 
   remix_dprintf ("[remix_deck_onetrack_process] processed %ld\n", n);
 

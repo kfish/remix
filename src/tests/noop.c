@@ -1,5 +1,5 @@
 /*
- * sndfiletest.c
+ * noop.c
  *
  * Copyright (C) 2006 Commonwealth Scientific and Industrial Research
  * Organisation (CSIRO), Australia.

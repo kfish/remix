@@ -1,7 +1,7 @@
 /*
  * sndfiletest.c
  *
- * Copyright (C) 2001 Commonwealth Scientific and Industrial Research
+ * Copyright (C) 2006 Commonwealth Scientific and Industrial Research
  * Organisation (CSIRO), Australia.
  *
  * Permission to use, copy, modify, distribute, and sell this software and

@@ -72,7 +72,8 @@ remix_track_init (RemixEnv * env, RemixBase * base)
 static RemixTrack *
 _remix_track_new (RemixEnv * env)
 {
-  return (RemixTrack *) remix_base_new_subclass (env, sizeof (struct _RemixTrack));
+  return (RemixTrack *)
+    remix_base_new_subclass (env, sizeof (struct _RemixTrack));
 }
 
 RemixBase *
@@ -181,8 +182,8 @@ remix_track_get_deck (RemixEnv * env, RemixTrack * track)
  * of 'track'.
  */
 RemixLayer *
-_remix_track_add_layer_above (RemixEnv * env, RemixTrack * track, RemixLayer * layer,
-			   RemixLayer * above)
+_remix_track_add_layer_above (RemixEnv * env, RemixTrack * track,
+                              RemixLayer * layer, RemixLayer * above)
 {
   layer->track = track;
   if (above == RemixNone)
@@ -195,7 +196,8 @@ _remix_track_add_layer_above (RemixEnv * env, RemixTrack * track, RemixLayer * l
 }
 
 RemixLayer *
-_remix_track_remove_layer (RemixEnv * env, RemixTrack * track, RemixLayer * layer)
+_remix_track_remove_layer (RemixEnv * env, RemixTrack * track,
+                           RemixLayer * layer)
 {
   track->layers = cd_list_remove (env, track->layers, CD_TYPE_POINTER,
 				  CD_POINTER(layer));
@@ -207,7 +209,8 @@ _remix_track_remove_layer (RemixEnv * env, RemixTrack * track, RemixLayer * laye
  * gets layer above 'above'. If above is RemixNone, returns topmost layer
  */
 RemixLayer *
-_remix_track_get_layer_above (RemixEnv * env, RemixTrack * track, RemixLayer * above)
+_remix_track_get_layer_above (RemixEnv * env, RemixTrack * track,
+                              RemixLayer * above)
 {
   CDList * above_item;
   RemixLayer * layer;
@@ -233,7 +236,8 @@ _remix_track_get_layer_above (RemixEnv * env, RemixTrack * track, RemixLayer * a
  * gets layer below 'below'. If below is RemixNone, returns lowest layer
  */
 RemixLayer *
-_remix_track_get_layer_below (RemixEnv * env, RemixTrack * track, RemixLayer * below)
+_remix_track_get_layer_below (RemixEnv * env, RemixTrack * track,
+                              RemixLayer * below)
 {
   CDList * below_item;
   RemixLayer * layer;
@@ -256,8 +260,8 @@ _remix_track_get_layer_below (RemixEnv * env, RemixTrack * track, RemixLayer * b
 
 
 static RemixCount
-remix_track_process (RemixEnv * env, RemixBase * base, RemixCount count, RemixStream * input,
-                  RemixStream * output)
+remix_track_process (RemixEnv * env, RemixBase * base, RemixCount count,
+                     RemixStream * input, RemixStream * output)
 {
   RemixTrack * track = (RemixTrack *)base;
   CDList * l;
@@ -313,8 +317,9 @@ remix_track_process (RemixEnv * env, RemixBase * base, RemixCount count, RemixSt
 }
 
 static RemixCount
-remix_track_twolayer_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			   RemixStream * input, RemixStream * output)
+remix_track_twolayer_process (RemixEnv * env, RemixBase * base,
+                              RemixCount count, RemixStream * input,
+                              RemixStream * output)
 {
   RemixTrack * track = (RemixTrack *)base;
   CDList * l;
@@ -360,8 +365,9 @@ remix_track_twolayer_process (RemixEnv * env, RemixBase * base, RemixCount count
 }
 
 static RemixCount
-remix_track_onelayer_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			   RemixStream * input, RemixStream * output)
+remix_track_onelayer_process (RemixEnv * env, RemixBase * base,
+                              RemixCount count, RemixStream * input,
+                              RemixStream * output)
 {
   RemixTrack * track = (RemixTrack *)base;
   CDList * l = track->layers;

@@ -31,7 +31,8 @@
 
 /* Optimisation dependencies: optimise when adding and removing points
  * or changing envelope type */
-static RemixEnvelope * remix_envelope_optimise (RemixEnv * env, RemixEnvelope * envelope);
+static RemixEnvelope *
+remix_envelope_optimise (RemixEnv * env, RemixEnvelope * envelope);
 
 static void
 remix_envelope_debug (RemixEnv * env, RemixEnvelope * envelope)
@@ -110,8 +111,8 @@ remix_envelope_init (RemixEnv * env, RemixBase * base)
 RemixEnvelope *
 remix_envelope_new (RemixEnv * env, RemixEnvelopeType type)
 {
-  RemixEnvelope * envelope =
-    (RemixEnvelope *)remix_base_new_subclass (env, sizeof (struct _RemixEnvelope));
+  RemixEnvelope * envelope = (RemixEnvelope *)
+    remix_base_new_subclass (env, sizeof (struct _RemixEnvelope));
   remix_envelope_init (env, (RemixBase *)envelope);
   envelope->type = type;
   remix_envelope_debug (env, envelope);
@@ -183,8 +184,8 @@ remix_envelope_get_duration (RemixEnv * env, RemixEnvelope * envelope)
 }
 
 RemixPoint *
-remix_envelope_add_point (RemixEnv * env, RemixEnvelope * envelope, RemixTime time,
-		       RemixPCM value)
+remix_envelope_add_point (RemixEnv * env, RemixEnvelope * envelope,
+                          RemixTime time, RemixPCM value)
 {
   RemixPoint * point = remix_point_new (time, value);
   switch (envelope->timetype) {
@@ -213,7 +214,8 @@ remix_envelope_add_point (RemixEnv * env, RemixEnvelope * envelope, RemixTime ti
 }
 
 RemixEnvelope *
-remix_envelope_remove_point (RemixEnv * env, RemixEnvelope * envelope, RemixPoint * point)
+remix_envelope_remove_point (RemixEnv * env, RemixEnvelope * envelope,
+                             RemixPoint * point)
 {
   envelope->points = cd_list_remove (env, envelope->points,
 				     CD_TYPE_POINTER, CD_POINTER(point));
@@ -253,7 +255,7 @@ remix_envelope_shift (RemixEnv * env, RemixEnvelope * envelope, RemixTime delta)
 
 static CDList *
 remix_envelope_point_item_before (RemixEnv * env, RemixEnvelope * envelope,
-			       RemixCount offset)
+                                  RemixCount offset)
 {
   CDList * l, * lp = RemixNone;
   RemixPoint * point;
@@ -262,7 +264,7 @@ remix_envelope_point_item_before (RemixEnv * env, RemixEnvelope * envelope,
   for (l = envelope->points; l; l = l->next) {
     point = (RemixPoint *)l->data.s_pointer;
     ptime = remix_time_convert (env, point->time, envelope->timetype,
-			     REMIX_TIME_SAMPLES);
+                                REMIX_TIME_SAMPLES);
     if (ptime.samples > offset) break;
     lp = l;
   }
@@ -270,8 +272,9 @@ remix_envelope_point_item_before (RemixEnv * env, RemixEnvelope * envelope,
 }
 
 static RemixCount
-remix_envelope_constant_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
-				  RemixCount count, int channelname, void * data)
+remix_envelope_constant_write_chunk (RemixEnv * env, RemixChunk * chunk,
+                                     RemixCount offset, RemixCount count,
+                                     int channelname, void * data)
 {
   RemixEnvelope * envelope = (RemixEnvelope *)data;
   RemixPoint * point;
@@ -290,8 +293,9 @@ remix_envelope_constant_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCo
 
 #if 0
 static RemixCount
-remix_envelope_spline_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
-				RemixCount count, int channelname, void * data)
+remix_envelope_spline_write_chunk (RemixEnv * env, RemixChunk * chunk,
+                                   RemixCount offset, RemixCount count,
+                                   int channelname, void * data)
 {
   RemixEnvelope * envelope = (RemixEnvelope *)data;
   /* XXX: Implement ;) */
@@ -299,10 +303,11 @@ remix_envelope_spline_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCoun
 }
 #endif
 
-/* An RemixChunkFunc for creating envelope data */
+/* A RemixChunkFunc for creating envelope data */
 static RemixCount
-remix_envelope_linear_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
-				RemixCount count, int channelname, void * data)
+remix_envelope_linear_write_chunk (RemixEnv * env, RemixChunk * chunk,
+                                   RemixCount offset, RemixCount count,
+                                   int channelname, void * data)
 {
   RemixEnvelope * envelope = (RemixEnvelope *)data;
   RemixCount remaining = count, written = 0;
@@ -341,13 +346,14 @@ remix_envelope_linear_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCoun
   }
 
   point = (RemixPoint *)l->data.s_pointer;
-  t = remix_time_convert (env, point->time, envelope->timetype, REMIX_TIME_SAMPLES);
+  t = remix_time_convert (env, point->time, envelope->timetype,
+                          REMIX_TIME_SAMPLES);
   px = t.samples;
   py = point->value;
   
   next_point = (RemixPoint *)nl->data.s_pointer;
   t = remix_time_convert (env, next_point->time, envelope->timetype,
-		       REMIX_TIME_SAMPLES);
+                          REMIX_TIME_SAMPLES);
   npx = t.samples;
   npy = next_point->value;
 
@@ -361,7 +367,7 @@ remix_envelope_linear_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCoun
     gradient = (npy - py) / (RemixPCM)(npx - px);
     
     d = &chunk->data[offset];
-    /*    _remix_pcm_write_linear (d, px - chunk->start_index, py, gradient, n);*/
+    /*  _remix_pcm_write_linear (d, px - chunk->start_index, py, gradient, n);*/
     n = _remix_pcm_write_linear (d, px, py, npx, npy, pos, n);
     
     remaining -= n;
@@ -375,7 +381,7 @@ remix_envelope_linear_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCoun
       nl = nl->next;
       next_point = (RemixPoint *)nl->data.s_pointer;
       t = remix_time_convert (env, next_point->time, envelope->timetype,
-			   REMIX_TIME_SAMPLES);
+                              REMIX_TIME_SAMPLES);
       npx = t.samples;
       npy = next_point->value;
     }
@@ -388,33 +394,39 @@ remix_envelope_linear_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCoun
 }
 
 static RemixCount
-remix_envelope_constant_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			      RemixStream * input, RemixStream * output)
+remix_envelope_constant_process (RemixEnv * env, RemixBase * base,
+                                 RemixCount count, RemixStream * input,
+                                 RemixStream * output)
 {
   RemixEnvelope * envelope = (RemixEnvelope *)base;
   return remix_stream_chunkfuncify (env, output, count,
-				 remix_envelope_constant_write_chunk, envelope);
+                                    remix_envelope_constant_write_chunk,
+                                    envelope);
 }
 
 static RemixCount
-remix_envelope_spline_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			    RemixStream * input, RemixStream * output)
+remix_envelope_spline_process (RemixEnv * env, RemixBase * base,
+                               RemixCount count, RemixStream * input,
+                               RemixStream * output)
 {
+  /* XXX: Implement */
   return -1;
 }
 
 static RemixCount
-remix_envelope_linear_process (RemixEnv * env, RemixBase * base, RemixCount count,
-			    RemixStream * input, RemixStream * output)
+remix_envelope_linear_process (RemixEnv * env, RemixBase * base,
+                               RemixCount count, RemixStream * input,
+                               RemixStream * output)
 {
   RemixEnvelope * envelope = (RemixEnvelope *)base;
   return remix_stream_chunkfuncify (env, output, count,
-				 remix_envelope_linear_write_chunk, envelope);
+                                    remix_envelope_linear_write_chunk,
+                                    envelope);
 }
 
 static RemixCount
 remix_envelope_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		     RemixStream * input, RemixStream * output)
+                        RemixStream * input, RemixStream * output)
 {
   RemixEnvelope * envelope = (RemixEnvelope *)base;
 
@@ -438,7 +450,7 @@ remix_envelope_length (RemixEnv * env, RemixBase * base)
   RemixEnvelope * envelope = (RemixEnvelope *)base;
   RemixTime duration = remix_envelope_get_duration (env, envelope);
   RemixTime t = remix_time_convert (env, duration, envelope->timetype,
-			      REMIX_TIME_SAMPLES);
+                                    REMIX_TIME_SAMPLES);
   return t.samples;
 }
 

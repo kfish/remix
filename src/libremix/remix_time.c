@@ -128,7 +128,8 @@ remix_seconds_to_beat24s (float seconds, RemixTempo tempo)
 }
 
 static RemixCount
-remix_beat24s_to_samples (int beat24s, RemixSamplerate samplerate, RemixTempo tempo)
+remix_beat24s_to_samples (int beat24s, RemixSamplerate samplerate,
+                          RemixTempo tempo)
 {
   return (RemixCount)(beat24s * samplerate * 60.0 / (tempo * 24.0));
 }
@@ -142,7 +143,7 @@ remix_beat24s_to_seconds (int beat24s, RemixTempo tempo)
 
 RemixTime
 remix_time_convert (RemixEnv * env, RemixTime time, RemixTimeType old_type,
-		   RemixTimeType new_type)
+                    RemixTimeType new_type)
 {
   RemixSamplerate samplerate;
   RemixTempo tempo;
@@ -159,7 +160,8 @@ remix_time_convert (RemixEnv * env, RemixTime time, RemixTimeType old_type,
       return (RemixTime) remix_samples_to_seconds (time.samples, samplerate);
       break;
     case REMIX_TIME_BEAT24S:
-      return (RemixTime) remix_samples_to_beat24s (time.samples, samplerate, tempo);
+      return (RemixTime)
+        remix_samples_to_beat24s (time.samples, samplerate, tempo);
       break;
     default: break;
     }
@@ -178,7 +180,8 @@ remix_time_convert (RemixEnv * env, RemixTime time, RemixTimeType old_type,
   case REMIX_TIME_BEAT24S:
     switch (new_type) {
     case REMIX_TIME_SAMPLES:
-      return (RemixTime) remix_beat24s_to_samples (time.beat24s, samplerate, tempo);
+      return (RemixTime)
+        remix_beat24s_to_samples (time.beat24s, samplerate, tempo);
       break;
     case REMIX_TIME_SECONDS:
       return (RemixTime) remix_beat24s_to_seconds (time.beat24s, tempo);

@@ -258,6 +258,10 @@ remix_ladspa_prepare (RemixEnv * env, RemixBase * base)
 
 }
 
+/*
+ * remix_ladspa_1_0:
+ * A RemixChunkChunkFunc for a mono LADSPA sound consumer.
+ */
 static RemixCount
 remix_ladspa_1_0 (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
 	       RemixCount count, int channelname, void * data)
@@ -282,6 +286,10 @@ remix_ladspa_1_0 (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
   return count;
 }
 
+/*
+ * remix_ladspa_0_1:
+ * A RemixChunkChunkFunc for a mono LADSPA sound generator.
+ */
 static RemixCount
 remix_ladspa_0_1 (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
 	       RemixCount count, int channelname, void * data)
@@ -307,12 +315,13 @@ remix_ladspa_0_1 (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
 }
 
 /*
- * remix_ladspa_1_1: An RemixChunkChunkFunc for filtering with a mono LADSPA plugin
+ * remix_ladspa_1_1:
+ * A RemixChunkChunkFunc for filtering with a mono LADSPA plugin.
  */
 static RemixCount
 remix_ladspa_1_1 (RemixEnv * env, RemixChunk * src, RemixCount src_offset,
-	       RemixChunk * dest, RemixCount dest_offset,
-	       RemixCount count, int channelname, void * data)
+                  RemixChunk * dest, RemixCount dest_offset,
+                  RemixCount count, int channelname, void * data)
 {
   RemixLADSPA * al = (RemixLADSPA *) data;
   LADSPA_Descriptor * d;
@@ -661,7 +670,7 @@ remix_ladspa_connect_control_inputs (RemixEnv * env, RemixBase * base)
 
 static RemixCount
 remix_ladspa_1_0_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		       RemixStream * input, RemixStream * output)
+                          RemixStream * input, RemixStream * output)
 {
   RemixLADSPA * al = remix_base_get_instance_data (env, base);
   remix_ladspa_connect_control_inputs (env, base);
@@ -670,7 +679,7 @@ remix_ladspa_1_0_process (RemixEnv * env, RemixBase * base, RemixCount count,
 
 static RemixCount
 remix_ladspa_0_1_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		       RemixStream * input, RemixStream * output)
+                          RemixStream * input, RemixStream * output)
 {
   RemixLADSPA * al = remix_base_get_instance_data (env, base);
   remix_ladspa_connect_control_inputs (env, base);
@@ -679,17 +688,17 @@ remix_ladspa_0_1_process (RemixEnv * env, RemixBase * base, RemixCount count,
 
 static RemixCount
 remix_ladspa_1_1_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		       RemixStream * input, RemixStream * output)
+                          RemixStream * input, RemixStream * output)
 {
   RemixLADSPA * al = remix_base_get_instance_data (env, base);
   remix_ladspa_connect_control_inputs (env, base);
   return remix_stream_chunkchunkfuncify (env, input, output, count,
-				      remix_ladspa_1_1, al);
+                                         remix_ladspa_1_1, al);
 }
 
 static RemixCount
 remix_ladspa_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		   RemixStream * input, RemixStream * output)
+                      RemixStream * input, RemixStream * output)
 {
   RemixPlugin * plugin = remix_base_get_plugin (env, base);
   RemixLADSPA * al;

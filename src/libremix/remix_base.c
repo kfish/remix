@@ -134,7 +134,7 @@ remix_set_parameter (RemixEnv * env, RemixBase * base, int key,
   }
 
   remix_dprintf ("[remix_set_parameter] base %p, [%d] ==> %p\n", base, key,
-	      parameter.s_pointer);
+                 parameter.s_pointer);
   base->parameters = cd_set_replace (env, base->parameters, key, parameter);
   return parameter;
 }
@@ -152,7 +152,7 @@ remix_get_parameter (RemixEnv * env, RemixBase * base, int key)
 
   p = cd_set_find (env, base->parameters, key);
   remix_dprintf ("[remix_get_parameter] base %p, [%d] == %p\n", base, key,
-	      p.s_pointer);
+                 p.s_pointer);
   return p;
 }
 

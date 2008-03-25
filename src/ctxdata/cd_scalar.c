@@ -21,7 +21,7 @@
  */
 
 /*
- * CDSet: A keyed set implementation.
+ * CDScalar: Polymorphic scalar values
  *
  * Conrad Parker <Conrad.Parker@CSIRO.AU>, August 2001
  */

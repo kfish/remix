@@ -86,7 +86,8 @@ remix_layer_init (RemixEnv * env, RemixBase * base)
 static RemixBase *
 _remix_layer_new (RemixEnv * env)
 {
-  return (RemixBase *) remix_base_new_subclass (env, sizeof (struct _RemixLayer));
+  return (RemixBase *)
+    remix_base_new_subclass (env, sizeof (struct _RemixLayer));
 }
 
 RemixBase *
@@ -436,7 +437,7 @@ remix_layer_length (RemixEnv * env, RemixBase * base)
   t = remix_time_convert (env, end, layer->timetype, REMIX_TIME_SAMPLES);
 
   remix_dprintf ("[remix_layer_length] (%p) last sound ends at %d ticks == %ld samples\n",
-	      layer, end.beat24s, t.samples);
+                 layer, end.beat24s, t.samples);
 
   return t.samples;
 }

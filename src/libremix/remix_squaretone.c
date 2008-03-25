@@ -83,8 +83,8 @@ remix_squaretone_init (RemixEnv * env, RemixBase * base)
 RemixBase *
 remix_squaretone_new (RemixEnv * env, float frequency)
 {
-  RemixSquareTone * squaretone =
-    (RemixSquareTone *)remix_base_new_subclass (env, sizeof (struct _RemixSquareTone));
+  RemixSquareTone * squaretone = (RemixSquareTone *)
+    remix_base_new_subclass (env, sizeof (struct _RemixSquareTone));
   remix_squaretone_init (env, (RemixBase *)squaretone);
   squaretone->frequency = frequency;
 
@@ -143,8 +143,9 @@ remix_squaretone_get_frequency (RemixEnv * env, RemixBase * base)
 
 /* An RemixChunkFunc for creating squaretone data */
 static RemixCount
-remix_squaretone_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount offset,
-			   RemixCount count, int channelname, void * data)
+remix_squaretone_write_chunk (RemixEnv * env, RemixChunk * chunk,
+                              RemixCount offset, RemixCount count,
+                              int channelname, void * data)
 {
   RemixSquareTone * squaretone = (RemixSquareTone *)data;
   RemixSquareToneChannel * sqch;
@@ -153,14 +154,15 @@ remix_squaretone_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount off
   RemixPCM * d, value;
   CDScalar k;
 
-  remix_dprintf ("[remix_squaretone_write_chunk] (+%ld) @ %ld\n", count, offset);
+  remix_dprintf ("[remix_squaretone_write_chunk] (+%ld) @ %ld\n",
+                 count, offset);
 
   k = cd_set_find (env, squaretone->channels, channelname);
   sqch = k.s_pointer;
 
   if (sqch == RemixNone) {
     remix_dprintf ("[remix_squaretone_write_chunk] channel %d not found\n",
-		channelname);
+                   channelname);
     remix_set_error (env, REMIX_ERROR_SILENCE);
     return -1;
   }
@@ -168,7 +170,7 @@ remix_squaretone_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount off
   wavelength = (RemixCount)(remix_get_samplerate (env) / squaretone->frequency);
 
   remix_dprintf ("[remix_squaretone_write_chunk] wavelength %ld, cycle_offset %ld\n",
-	      wavelength, sqch->_cycle_offset);
+                 wavelength, sqch->_cycle_offset);
   
   if (sqch->_cycle_offset < wavelength/2) {
     n = MIN (remaining, wavelength/2 - sqch->_cycle_offset);
@@ -200,11 +202,11 @@ remix_squaretone_write_chunk (RemixEnv * env, RemixChunk * chunk, RemixCount off
 
 static RemixCount
 remix_squaretone_process (RemixEnv * env, RemixBase * base, RemixCount count,
-		       RemixStream * input, RemixStream * output)
+                          RemixStream * input, RemixStream * output)
 {
   RemixSquareTone * squaretone = (RemixSquareTone *)base;
   return remix_stream_chunkfuncify (env, output, count,
-				 remix_squaretone_write_chunk, squaretone);
+                                    remix_squaretone_write_chunk, squaretone);
 }
 
 static RemixCount
