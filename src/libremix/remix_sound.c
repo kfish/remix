@@ -23,7 +23,7 @@
 /*
  * RemixSound: An instance of an base within an RemixLayer sequence.
  *
- * Conrad Parker <Conrad.Parker@CSIRO.AU>, August 2001
+ * Conrad Parker <conrad@metadecks.org>, August 2001
  *
  * Description
  * -----------

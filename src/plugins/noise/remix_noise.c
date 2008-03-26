@@ -23,7 +23,7 @@
 /*
  * RemixNoise: a noise generator
  *
- * Conrad Parker <Conrad.Parker@CSIRO.AU>, August 2001
+ * Conrad Parker <conrad@metadecks.org>, August 2001
  */
 
 #include <stdlib.h>
@@ -117,7 +117,7 @@ static struct _RemixMetaText noise_metatext = {
   "White noise generator",
   "Copyright (C) 2001 CSIRO Australia",
   "http://www.metadecks.org/remix/plugins/noise.html",
-  REMIX_ONE_AUTHOR ("Conrad Parker", "Conrad.Parker@CSIRO.AU"),
+  REMIX_ONE_AUTHOR ("Conrad Parker", "conrad@metadecks.org"),
 };
 
 static struct _RemixPlugin noise_plugin = {

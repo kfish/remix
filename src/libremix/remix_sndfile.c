@@ -23,7 +23,7 @@
 /*
  * RemixSndfile: a libsndfile handler
  *
- * Conrad Parker <Conrad.Parker@CSIRO.AU>, August 2001
+ * Conrad Parker <conrad@metadecks.org>, August 2001
  */
 
 #include <stdio.h>
@@ -366,7 +366,7 @@ static struct _RemixMetaText sndfile_reader_metatext = {
   "Reads PCM audio files using libsndfile",
   "Copyright (C) 2001, 2002 CSIRO Australia",
   "http://www.metadecks.org/software/env/plugins/sndfile.html",
-  REMIX_ONE_AUTHOR ("Conrad Parker", "Conrad.Parker@CSIRO.AU"),
+  REMIX_ONE_AUTHOR ("Conrad Parker", "conrad@metadecks.org"),
 };
 
 static struct _RemixMetaText sndfile_writer_metatext = {
@@ -375,7 +375,7 @@ static struct _RemixMetaText sndfile_writer_metatext = {
   "Writes PCM audio files using libsndfile",
   "Copyright (C) 2001, 2002 CSIRO Australia",
   "http://www.metadecks.org/software/env/plugins/sndfile.html",
-  REMIX_ONE_AUTHOR ("Conrad Parker", "Conrad.Parker@CSIRO.AU"),
+  REMIX_ONE_AUTHOR ("Conrad Parker", "conrad@metadecks.org"),
 };
 
 static struct _RemixPlugin sndfile_reader_plugin = {

@@ -23,7 +23,7 @@
 /*
  * RemixGain: a gain filter
  *
- * Conrad Parker <Conrad.Parker@CSIRO.AU>, August 2001
+ * Conrad Parker <conrad@metadecks.org>, August 2001
  */
 
 #include <stdlib.h>
@@ -201,7 +201,7 @@ static struct _RemixMetaText gain_metatext = {
   "Adjusts the gain of its input",
   "Copyright (C) 2001 CSIRO Australia",
   "http://www.metadecks.org/env/plugins/gain.html",
-  REMIX_ONE_AUTHOR ("Conrad Parker", "Conrad.Parker@CSIRO.AU"),
+  REMIX_ONE_AUTHOR ("Conrad Parker", "conrad@metadecks.org"),
 };
 
 static struct _RemixPlugin gain_plugin = {

@@ -23,7 +23,7 @@
 /*
  * RemixContext: REMIX core context.
  *
- * Conrad Parker <Conrad.Parker@CSIRO.AU>, August 2001
+ * Conrad Parker <conrad@metadecks.org>, August 2001
  */
 
 #include <string.h>

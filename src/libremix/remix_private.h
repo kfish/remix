@@ -23,7 +23,7 @@
 /*
  * remix_private.h -- libremix internal data types and functions.
  *
- * Conrad Parker <Conrad.Parker@CSIRO.AU>, August 2001
+ * Conrad Parker <conrad@metadecks.org>, August 2001
  */
 
 #ifndef __REMIX_PRIVATE_H__
