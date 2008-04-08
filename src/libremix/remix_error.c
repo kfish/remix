@@ -66,7 +66,7 @@ remix_exit_err (const char * fmt, ...)
 
   va_start (ap, fmt);
 
-  snprintf (buf, REMIX_MAXLINE, "SOUNDRENDER: ");
+  snprintf (buf, REMIX_MAXLINE, "Remix: ");
   n = strlen (buf);
 
   vsnprintf (buf+n, REMIX_MAXLINE-n, fmt, ap);
