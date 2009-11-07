@@ -24,5 +24,6 @@ noisedemo_LDADD = $(REMIX_LIBS)
 squaredemo_SOURCES = squaredemo.c
 squaredemo_LDADD = $(REMIX_LIBS)
 
+sndfiledemo_CFLAGS = -DSAMPLEDIR=\"$(srcdir)\"
 sndfiledemo_SOURCES = sndfiledemo.c
 sndfiledemo_LDADD = $(REMIX_LIBS) @SNDFILE_LIBS@

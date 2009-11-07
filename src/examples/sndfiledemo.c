@@ -51,14 +51,13 @@ main (int argc, char ** argv)
   sf_plugin = remix_find_plugin (env, "builtin::sndfile_reader");
   sf_parms = cd_set_new (env);
   sf_path_key = remix_get_init_parameter_key (env, sf_plugin, "path");
-  sf_parms = cd_set_insert (env, sf_parms, sf_path_key,
-		            CD_STRING("./1052.wav"));
+  sf_parms = cd_set_insert (env, sf_parms, sf_path_key, CD_STRING(SAMPLEDIR "/1052.wav"));
   if (sf_plugin == NULL) {
     fprintf (stderr, "sf_plugin == NULL\n");
     exit (1);
   }
   sf1 = remix_new (env, sf_plugin, sf_parms);
-  sf_parms = cd_set_replace (env, sf_parms, 1, CD_STRING("909_cl.wav"));
+  sf_parms = cd_set_replace (env, sf_parms, 1, CD_STRING(SAMPLEDIR "/909_cl.wav"));
   sf2 = remix_new (env, sf_plugin, sf_parms);
 #endif
   square = remix_squaretone_new (env, 220);
