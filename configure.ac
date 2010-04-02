@@ -10,6 +10,7 @@ dnl Checks for programs.
 AM_PROG_LIBTOOL
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
+AM_PROG_CC_C_O
 
 # Check for doxygen
 AC_CHECK_PROG(HAVE_DOXYGEN, doxygen, true, false)
