@@ -976,6 +976,8 @@ ladspa_wrapper_load_dir (RemixEnv * env, char * dirname)
     plugins = cd_list_join (env, plugins, l);
   }
 
+  closedir (dir);
+
   return plugins;
 }
 
