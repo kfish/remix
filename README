@@ -1,10 +1,36 @@
+About libremix
+==============
 
 libremix is a library for audio sequencing and mixing.
 
-Copyright (C) 2000-2008 Conrad Parker <conrad@metadecks.org>
+More information is available online at the libremix homepage:
+
+http://www.metadecks.org/software/remix/
+
+To receive announcements about new libremix releases, please join the
+remix-announce mailing list listed on the homepage.
+
+Developers
+----------
+
+Please join the remix-devel mailing list, linked from the homepage.
+
+libremix is maintained in Subversion with anonymous read access. You can
+check out the most current version of libremix from:
+
+svn co http://svn.metadecks.org/libremix/trunk libremix
+
+A list of outstanding tasks is maintained in the TODO file of this source
+distribution. When implementing anything listed in this file, please update
+it by deleting that entry, and include that as part of the patch or commit
+that implements the fix.
+
+Copyrights
+----------
+
+Copyright (C) 2000-2010 Conrad Parker <conrad@metadecks.org>
 Copyright (C) 2001, 2002 Commonwealth Scientific and Industrial Research
 Organisation (CSIRO), Australia.
-
 
 Licence
 -------
@@ -29,3 +55,4 @@ Contact
 For technical and other queries, please contact the author:
 
 Conrad Parker <conrad@metadecks.org>
+(kfish on #lad or #sweep on Freenode).
