@@ -1,0 +1,19 @@
+
+This is a loosely-categorized list of outstanding tasks and ideas for improving
+libremix. When implementing any of these, please include an update to this TODO
+file removing that task, in the same commit.
+
+* update with TODOs from paper file
+
+Memory leaks
+------------
+
+libremix:
+	* implement remix_destroy_list() in remix_context.c, and call it on
+	  world->plugins and world->bases
+
+ladspa:
+	* implement plugin->destroy
+	* keep module pointer returned by dlopen() in remix-ladspa.c, and
+	  call dlclose() on that from remix_purge().
+	* free schemes created for each ladspa port
