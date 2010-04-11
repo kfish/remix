@@ -13,7 +13,4 @@ libremix:
 	  world->plugins and world->bases
 
 ladspa:
-	* implement plugin->destroy
-	* keep module pointer returned by dlopen() in remix-ladspa.c, and
-	  call dlclose() on that from remix_purge().
 	* free schemes created for each ladspa port

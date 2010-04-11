@@ -47,11 +47,11 @@ remix_context_destroy (RemixEnv * env)
 
   world->purging = 1;
 
-  cd_list_apply (env, world->plugins, (CDFunc)remix_plugin_destroy);
-  world->plugins = cd_list_free (env, world->plugins);
+  world->plugins = cd_list_destroy_with (env, world->plugins, remix_plugin_destroy);
+  remix_plugin_defaults_unload (env);
 
-  /* XXX: remix_destroy_list (env, world->plugins); */
-  /* XXX:  remix_destroy_list (env, world->bases); */
+  /* TODO: remix_destroy_list (env, world->plugins); */
+  /* TODO:  remix_destroy_list (env, world->bases); */
   remix_channelset_defaults_destroy (env);
   remix_free (ctx);
   remix_free (world);

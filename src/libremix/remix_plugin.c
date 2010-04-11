@@ -41,6 +41,8 @@
 #define __REMIX__
 #include "remix.h"
 
+static CDList * modules_list = CD_EMPTY_LIST;
+
 static CDList *
 remix_plugin_initialise_static (RemixEnv * env)
 {
@@ -59,6 +61,7 @@ static CDList *
 remix_plugin_init (RemixEnv * env, const char * path)
 {
   void * module;
+  CDList * l;
   RemixPluginInitFunc init;
 
   module = dlopen (path, RTLD_NOW);
@@ -69,6 +72,17 @@ remix_plugin_init (RemixEnv * env, const char * path)
     remix_set_error (env, REMIX_ERROR_SYSTEM);
     return CD_EMPTY_LIST;
   }
+
+  /* Check that this module has not already been loaded (eg. if it is
+   * a symlink etc.) */
+  for (l = modules_list; l; l = l->next) {
+    if (l->data.s_pointer == module) {
+      dlclose (module);
+      return CD_EMPTY_LIST;
+    }
+  }
+
+  modules_list = cd_list_append (env, modules_list, CD_POINTER(module));
 
   if ((init = dlsym (module, "remix_load")) != NULL) {
     return init (env);
@@ -128,6 +142,28 @@ remix_plugin_defaults_initialise (RemixEnv * env)
   plugins = cd_list_join (env, plugins, remix_plugin_initialise_dynamic (env));
 
   cd_list_apply (env, plugins, (CDFunc)_remix_register_plugin);
+}
+
+static int
+remix_plugin_unload (RemixEnv * env, void * module)
+{
+  RemixPluginInitFunc unload; /* TODO: make new unload type */
+
+  if ((unload = dlsym (module, "remix_unload")) != NULL) {
+    unload (env);
+  }
+
+  dlclose (module);
+
+  return 0;
+}
+
+void
+remix_plugin_defaults_unload (RemixEnv * env)
+{
+  CDList * l;
+
+  modules_list = cd_list_destroy_with (env, modules_list, (CDDestroyFunc)remix_plugin_unload);
 }
 
 #if 0

@@ -286,6 +286,7 @@ RemixEnv * _remix_unregister_base (RemixEnv * env, RemixBase * base);
 
 /* remix_plugin */
 void remix_plugin_defaults_initialise (RemixEnv * env);
+void remix_plugin_defaults_unload (RemixEnv * env);
 
 /* remix_deck */
 RemixTrack * _remix_deck_add_track (RemixEnv * env, RemixDeck * deck,

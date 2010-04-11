@@ -873,7 +873,7 @@ ladspa_wrapper_load_plugins (RemixEnv * env, char * dir, char * name)
   RemixPlugin * plugin;
   RemixMetaText * mt;
   RemixParameterScheme * scheme;
-  CDList * plugins = CD_EMPTY_LIST;
+  CDList * l, * plugins = CD_EMPTY_LIST;
 #define BUF_LEN 256
   static char buf[BUF_LEN];
   struct stat statbuf;
@@ -885,6 +885,17 @@ ladspa_wrapper_load_plugins (RemixEnv * env, char * dir, char * name)
 
   module = dlopen (path, RTLD_NOW);
   if (!module) return CD_EMPTY_LIST;
+
+  /* Check that this module has not already been loaded (eg. if it is
+   * a symlink etc.) */
+  for (l = modules_list; l; l = l->next) {
+    if (l->data.s_pointer == module) {
+      dlclose (module);
+      return CD_EMPTY_LIST;
+    }
+  }
+
+  modules_list = cd_list_append (env, modules_list, CD_POINTER(module));
 
   if ((desc_func = dlsym (module, "ladspa_descriptor"))) {
     for (i=0; (d = desc_func (i)) != NULL; i++) {
@@ -1028,5 +1039,7 @@ remix_unload (RemixEnv * env)
   for (l = modules_list; l; l = l->next) {
     dlclose(l->data.s_pointer);
   }
+
+  modules_list = NULL;
 }
 
