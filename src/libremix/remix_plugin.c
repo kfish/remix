@@ -142,6 +142,8 @@ remix_plugin_defaults_initialise (RemixEnv * env)
   plugins = cd_list_join (env, plugins, remix_plugin_initialise_dynamic (env));
 
   cd_list_apply (env, plugins, (CDFunc)_remix_register_plugin);
+
+  cd_list_free (env, plugins);
 }
 
 static int

@@ -50,8 +50,8 @@ remix_context_destroy (RemixEnv * env)
   world->plugins = cd_list_destroy_with (env, world->plugins, remix_plugin_destroy);
   remix_plugin_defaults_unload (env);
 
-  /* TODO: remix_destroy_list (env, world->plugins); */
-  /* TODO:  remix_destroy_list (env, world->bases); */
+  //world->bases = cd_list_destroy_with (env, world->bases, remix_destroy);
+
   remix_channelset_defaults_destroy (env);
   remix_free (ctx);
   remix_free (world);
