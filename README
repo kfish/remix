@@ -15,10 +15,9 @@ Developers
 
 Please join the remix-devel mailing list, linked from the homepage.
 
-libremix is maintained in Subversion with anonymous read access. You can
-check out the most current version of libremix from:
+libremix is maintained in Git at Github:
 
-svn co http://svn.metadecks.org/libremix/trunk libremix
+https://github.com/kfish/remix
 
 A list of outstanding tasks is maintained in the TODO file of this source
 distribution. When implementing anything listed in this file, please update
@@ -28,7 +27,7 @@ that implements the fix.
 Copyrights
 ----------
 
-Copyright (C) 2000-2010 Conrad Parker <conrad@metadecks.org>
+Copyright (C) 2000-2011 Conrad Parker <conrad@metadecks.org>
 Copyright (C) 2001, 2002 Commonwealth Scientific and Industrial Research
 Organisation (CSIRO), Australia.
 
