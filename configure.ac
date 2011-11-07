@@ -6,6 +6,26 @@ AM_CONFIG_HEADER(config.h)
 
 example_programs="noisedemo squaredemo"
 
+################################################################################
+# Set the shared versioning info, according to section 6.3 of the libtool info #
+# pages. CURRENT:REVISION:AGE must be updated immediately before each release: #
+#                                                                              #
+#   * If the library source code has changed at all since the last             #
+#     update, then increment REVISION (`C:R:A' becomes `C:r+1:A').             #
+#                                                                              #
+#   * If any interfaces have been added, removed, or changed since the         #
+#     last update, increment CURRENT, and set REVISION to 0.                   #
+#                                                                              #
+#   * If any interfaces have been added since the last public release,         #
+#     then increment AGE.                                                      #
+#                                                                              #
+#   * If any interfaces have been removed since the last public release,       #
+#     then set AGE to 0.                                                       #
+#                                                                              #
+################################################################################
+SHARED_VERSION_INFO="1:0:1"
+SHLIB_VERSION_ARG=""
+
 dnl Checks for programs.
 AM_PROG_LIBTOOL
 AC_PROG_INSTALL
@@ -144,6 +164,9 @@ if test "x$ac_cv_prog_gcc" = xyes ; then
 	fi
 
 fi
+
+AC_SUBST(SHLIB_VERSION_ARG)
+AC_SUBST(SHARED_VERSION_INFO)
 
 AC_OUTPUT([
 Makefile
