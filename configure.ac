@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/libremix/remix_base.c)
 
-AM_INIT_AUTOMAKE(remix, 0.2.3)
+AM_INIT_AUTOMAKE(remix, 0.2.4)
 AM_CONFIG_HEADER(config.h)
 
 example_programs="noisedemo squaredemo"
